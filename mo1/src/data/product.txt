@@ -1,0 +1,6 @@
+Laptop Dell;200000;00:21:01 06/12/2021;9.0
+Sam sung galaxy s21 Ultra;42000000;00:21:30 06/12/2021;8.0
+Laptop LenovoIdeapad Gaming 3;22000000;08/12/2021 00:16:14;0.0
+Sam sung galaxy j2 pro;42000000;00:21:30 06/12/2021;8.0
+Iphone 11 Pro Max;42000000;00:21:30 06/12/2021;8.0
+Iphone 12 Pro Max;42000000;00:21:30 06/12/2021;8.0
