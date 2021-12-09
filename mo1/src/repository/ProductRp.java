@@ -94,13 +94,12 @@ public class ProductRp implements IProduct {
 
     @Override
     public void search(String name) {
-
         Locale locale = new Locale("vi", "VN");
         NumberFormat format = NumberFormat.getCurrencyInstance(locale);
         format.setRoundingMode(RoundingMode.HALF_UP);
         ArrayList<Product> listProduct = readFile.read(ReadAndWriteFileProduct.filePath);
         System.out.println("\t\t\t\t\t\t------------------------------------------------------------------------------------------");
-        System.out.println("\t\t\t\t\t\t                        DANH SÁCH SẢN PHẨM CÓ THỂ BẠN ĐANG TÌM KIẾM                        ");
+        System.out.println("\t\t\t\t\t\t                          DANH SÁCH SẢN PHẨM BẠN ĐANG TÌM KIẾM                        ");
         System.out.println("\t\t\t\t\t\t------------------------------------------------------------------------------------------");
         System.out.printf("\t\t\t\t\t\t%-5s %-30s %-15s %-25s %-1s \n", "STT", "NAME", "PRICE (VND)", "DATEPOST", "SCORERATING   ");
         int count = 0;
@@ -130,20 +129,63 @@ public class ProductRp implements IProduct {
         int count = 0;
         for (Product p : listProduct) {
             String nameProduct = p.getName();
-            nameProduct = nameProduct.replaceAll(" ", "");
-            char[]ch =nameProduct.toCharArray();
-            for (int i = 0; i < ch.length; i++) {
-                System.out.print(ch[i]);
+            float percentWord = countWordAlike(name, nameProduct);
+            float percentChar= countChar(name, nameProduct);
+            if ((percentWord+(percentChar / 2)) > 30) {
+                count++;
+                System.out.printf("\t\t\t\t\t\t%-5s %-30s %-15s %-25s %-1s \n", count, p.getName(), format.format(p.getPrice()), p.getDatePost(), p.getScoreRating());
             }
         }
-//        String s1 = "hello";
-//        char[] ch = s1.toCharArray();
-//        for (int i = 0; i < ch.length; i++) {
-//            System.out.println(ch[i]);
-//        }
-        System.out.println("\t\t\t\t\t\t------------------------------------------------------------------------------------------");
 
+        System.out.println("\t\t\t\t\t\t------------------------------------------------------------------------------------------");
         System.out.println();
     }
 
+    public float countWordAlike(String nameInput, String nameProduct) {
+        int countWord = 0;
+        String nameInputString = nameInput.trim().replaceAll("\\s+", " ").toLowerCase();
+        String[] arrNameInput = nameInputString.split("\\s");
+
+        String nameProductString = nameProduct.trim().replaceAll("\\s+", " ").toLowerCase();
+        String[] arrNameProduct = nameProductString.split("\\s");
+        for (String ni : arrNameInput) {
+            for (String np : arrNameProduct) {
+                if (ni.equals(np)) {
+                    countWord = countWord + 1;
+                }
+            }
+        }
+
+        return countWord / (countWordInput(nameInput)) * 100;
+    }
+
+    public float countChar(String nameInput, String nameProduct) {
+        String nameInputChar = nameInput.trim().replaceAll("\\s+", "").toLowerCase();
+        char[] arrNameInput = nameInputChar.toCharArray();
+        String nameProductChar = nameProduct.trim().replaceAll("\\s+", " ").toLowerCase();
+        char[] arrNameProduct = nameProductChar.toCharArray();
+        float count = 0;
+        for (char ni : arrNameInput) {
+            for (char np : arrNameProduct) {
+                if (String.valueOf(ni).equals(String.valueOf(np))) {
+                    count++;
+                    break;
+                }
+
+
+            }
+        }
+        return count / (arrNameInput.length) * 100;
+    }
+
+    public static float countWordInput(String nameInput) {
+        int spaceCount = 0;
+        for (char c : nameInput.toCharArray()) {
+            if (c == ' ') {
+                spaceCount++;
+            }
+        }
+        return spaceCount + 1;
+    }
 }
+

@@ -39,7 +39,7 @@ public class Service {
                     pRp.search(name);
                     break;
                 case "3":
-                    System.out.print("Nhap gan dung 'Ten' san phan");
+                    System.out.print("Nhap gan dung 'Ten' san phan: ");
                     String names = inputs.nextLine();
                     pRp.searchSuggestions(names);
                     break;
