@@ -1,9 +1,9 @@
-import views.ShowFirst;
+import views.Main;
 
 public class Run {
     public static void main(String[] args) {
-        ShowFirst showFirst =new ShowFirst();
-        showFirst.view();
+        Main main=new Main();
+        main.view();
     }
 
 

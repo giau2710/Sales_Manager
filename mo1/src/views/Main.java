@@ -1,25 +1,25 @@
 package views;
 
 import repository.ProductRp;
-import sevices.Service;
+import sevices.ServiceVisitor;
 
 import java.util.Scanner;
 
-public class ShowFirst {
+public class Main {
     public static void menu(){
         System.out.println("|--------------------------------------|");
-        System.out.println("|              Menu Visitor            |");
+        System.out.println("|                 Menu                 |");
         System.out.println("|--------------------------------------|");
         System.out.println("| 1.Khach tham quan                    |");
         System.out.println("| 2.Dang nhap                          |");
         System.out.println("| 3.Dang ky                            |");
-        System.out.println("|                         0.Quay lai   |");
+        System.out.println("|               0.Thoat chuong trinh   |");
         System.out.println("|--------------------------------------|");
         System.out.print("Moi chon chuc nang:");
     }
     public void view() {
         ProductRp pRp = new ProductRp();
-        Service service = new Service();
+        ServiceVisitor service = new ServiceVisitor();
         menu();
         int choose;
         while (true) {
@@ -27,9 +27,11 @@ public class ShowFirst {
                 Scanner input = new Scanner(System.in);
                 try {
                     choose = input.nextInt();
+                    input.nextLine();
                     break;
                 } catch (Exception e) {
                     System.out.println("Chuc nang phai la 1 so!");
+                    menu();
                 }
             }
             switch (choose) {
@@ -39,27 +41,17 @@ public class ShowFirst {
                 case 2:
                     pRp.list();
                     break;
-                case 7:
-                    pRp.add();
-                    break;
                 case 3:
                     pRp.remove();
-//                    break;
-//                case 4:
-//                    shop.searchProduct();
-//                    break;
-                case 5:
+                case 0:
                     return;
                 default:
-                    System.out.println("Nhap dung chuc nang!");
+                    System.out.println("Khong co chuc nang nay. Moi ban nhap dung chuc nang!");
+                    menu();
                     break;
             }
         }
 
 
     }
-
-
 }
-
-

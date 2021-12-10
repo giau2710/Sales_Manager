@@ -1,11 +1,11 @@
 package sevices;
 
 import repository.ProductRp;
-import views.ShowFirst;
+import views.Main;
 
 import java.util.Scanner;
 
-public class Service {
+public class ServiceVisitor {
     public static void visitorMenu() {
         System.out.println("|--------------------------------------|");
         System.out.println("|              Menu Visitor            |");
@@ -21,9 +21,9 @@ public class Service {
         System.out.print("Moi nhap chuc nang:");
     }
 
+    Main main = new Main();
     Scanner inputs = new Scanner(System.in);
     ProductRp pRp = new ProductRp();
-    ShowFirst showFirst = new ShowFirst();
 
     public void visitor() {
         while (true) {
@@ -50,7 +50,7 @@ public class Service {
 
                     break;
                 case "0":
-                    showFirst.view();
+                    main.view();
                     break;
                 default:
                     System.out.println("Khong co chuc nang nay!");

@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 
 public class ProductRp implements IProduct {
-    ReadAndWriteFileProduct readFile = new ReadAndWriteFileProduct();
+    static ReadAndWriteFileProduct readFile = new ReadAndWriteFileProduct();
     Scanner inputs = new Scanner(System.in);
     ArrayList<Product> listProduct = new ArrayList<>();
 
@@ -98,19 +98,24 @@ public class ProductRp implements IProduct {
         NumberFormat format = NumberFormat.getCurrencyInstance(locale);
         format.setRoundingMode(RoundingMode.HALF_UP);
         ArrayList<Product> listProduct = readFile.read(ReadAndWriteFileProduct.filePath);
-        System.out.println("\t\t\t\t\t\t------------------------------------------------------------------------------------------");
-        System.out.println("\t\t\t\t\t\t                          DANH SÁCH SẢN PHẨM BẠN ĐANG TÌM KIẾM                        ");
-        System.out.println("\t\t\t\t\t\t------------------------------------------------------------------------------------------");
-        System.out.printf("\t\t\t\t\t\t%-5s %-30s %-15s %-25s %-1s \n", "STT", "NAME", "PRICE (VND)", "DATEPOST", "SCORERATING   ");
         int count = 0;
-        for (Product p : listProduct) {
-            if (p.getName().equals(name)) {
-                count++;
-                System.out.printf("\t\t\t\t\t\t%-5s %-30s %-15s %-25s %-1s \n", count, p.getName(), format.format(p.getPrice()), p.getDatePost(), p.getScoreRating());
-            }
+        if (exists(name)) {
+            for (Product p : listProduct) {
+                if (p.getName().equals(name)) {
+                    count++;
+                    System.out.println("\t\t\t\t\t\t------------------------------------------------------------------------------------------");
+                    System.out.println("\t\t\t\t\t\t                          DANH SÁCH SẢN PHẨM BẠN ĐANG TÌM KIẾM                        ");
+                    System.out.println("\t\t\t\t\t\t------------------------------------------------------------------------------------------");
+                    System.out.printf("\t\t\t\t\t\t%-5s %-30s %-15s %-25s %-1s \n", "STT", "NAME", "PRICE (VND)", "DATEPOST", "SCORERATING   ");
+                    System.out.printf("\t\t\t\t\t\t%-5s %-30s %-15s %-25s %-1s \n", count, p.getName(), format.format(p.getPrice()), p.getDatePost(), p.getScoreRating());
+                    System.out.println("\t\t\t\t\t\t------------------------------------------------------------------------------------------");
 
+                }
+
+            }
+        } else {
+            System.out.println("Khong co san pham " + name);
         }
-        System.out.println("\t\t\t\t\t\t------------------------------------------------------------------------------------------");
 
         System.out.println();
 
@@ -127,17 +132,26 @@ public class ProductRp implements IProduct {
         System.out.println("\t\t\t\t\t\t------------------------------------------------------------------------------------------");
         System.out.printf("\t\t\t\t\t\t%-5s %-30s %-15s %-25s %-1s \n", "STT", "NAME", "PRICE (VND)", "DATEPOST", "SCORERATING   ");
         int count = 0;
+        boolean checkProduct = false;
         for (Product p : listProduct) {
             String nameProduct = p.getName();
             float percentWord = countWordAlike(name, nameProduct);
-            float percentChar= countChar(name, nameProduct);
-            if ((percentWord+(percentChar / 2)) > 30) {
+            float percentChar = countChar(name, nameProduct);
+            boolean case1=percentWord>30;
+            boolean cas2=(percentChar/3)>30;
+            boolean case3=(percentWord + percentChar/4)>60;
+            if (case1 || cas2 || case3) {
+                checkProduct = true;
                 count++;
                 System.out.printf("\t\t\t\t\t\t%-5s %-30s %-15s %-25s %-1s \n", count, p.getName(), format.format(p.getPrice()), p.getDatePost(), p.getScoreRating());
             }
         }
-
         System.out.println("\t\t\t\t\t\t------------------------------------------------------------------------------------------");
+        if (!checkProduct) {
+            System.out.println("Khong co san pham " + name);
+        }
+
+
         System.out.println();
     }
 
@@ -186,6 +200,17 @@ public class ProductRp implements IProduct {
             }
         }
         return spaceCount + 1;
+    }
+
+    public static boolean exists(String nameExist) {
+        ArrayList<Product> listProduct = readFile.read(ReadAndWriteFileProduct.filePath);
+        for (Product p : listProduct) {
+            if (p.getName().equals(nameExist)) {
+                return true;
+            }
+
+        }
+        return false;
     }
 }
 
