@@ -1,7 +1,7 @@
 package views;
 
 import repository.ProductRp;
-import sevices.ServiceVisitor;
+import services.ServiceVisitor;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package sevices;
+package services;
 
 import repository.ProductRp;
 import views.Main;
@@ -39,19 +39,18 @@ public class ServiceVisitor {
                     pRp.search(name);
                     break;
                 case "3":
-                    System.out.print("Nhap gan dung 'Ten' san phan: ");
+                    System.out.print("Nhap trem 5 ki tu de tang do chinh xac: ");
                     String names = inputs.nextLine();
                     pRp.searchSuggestions(names);
                     break;
                 case "4":
-
+                    pRp.add();
                     break;
                 case "5":
 
-                    break;
                 case "0":
                     main.view();
-                    break;
+                    return;
                 default:
                     System.out.println("Khong co chuc nang nay!");
                     break;

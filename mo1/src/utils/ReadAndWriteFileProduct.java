@@ -12,7 +12,7 @@ public class ReadAndWriteFileProduct {
 
     public void write(ArrayList<Product> listStudent) {
         try {
-            FileWriter fw = new FileWriter(filePath, true);
+            FileWriter fw = new FileWriter(filePath,true);
             BufferedWriter bw = new BufferedWriter(fw);
             for (Product p : listStudent) {
                 bw.write(p.getName());

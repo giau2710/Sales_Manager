@@ -30,6 +30,7 @@ public class ProductRp implements IProduct {
             System.out.print("Nhap gia san pham: ");
             try {
                 price = input.nextInt();
+                inputs.nextLine();
                 if (price > 0) {
                     break;
                 }
@@ -38,9 +39,9 @@ public class ProductRp implements IProduct {
                 System.out.println("Gia phai la 1 so!");
             }
         }
+
         String datePost = df.format(d);
         System.out.println("Gio dang san pham nay la " + datePost);
-        inputs.nextLine();
         Product product = new Product(name, price, datePost);
         listProduct.add(product);
         System.out.println("Da them san pham thanh cong!");
@@ -73,18 +74,18 @@ public class ProductRp implements IProduct {
     @Override
     public void list() {
         //        Dinh dang tien te VN
-        Locale locale = new Locale("vi", "VN");
+        Locale locale = new Locale("en", "US");
         NumberFormat format = NumberFormat.getCurrencyInstance(locale);
         format.setRoundingMode(RoundingMode.HALF_UP);
         ArrayList<Product> listProduct = readFile.read(ReadAndWriteFileProduct.filePath);
         System.out.println("\t\t\t\t\t\t------------------------------------------------------------------------------------------");
         System.out.println("\t\t\t\t\t\t                               DANH SÁCH SẢN PHẨM                                         ");
         System.out.println("\t\t\t\t\t\t------------------------------------------------------------------------------------------");
-        System.out.printf("\t\t\t\t\t\t%-5s %-30s %-15s %-25s %-1s \n", "STT", "NAME", "PRICE (VND)", "DATEPOST", "SCORERATING   ");
+        System.out.printf("\t\t\t\t\t\t%-5s %-30s %-20s %-25s %-1s \n", "STT", "NAME", "PRICE (VND)", "DATEPOST", "SCORERATING   ");
         int count = 0;
         for (Product p : listProduct) {
             count++;
-            System.out.printf("\t\t\t\t\t\t%-5s %-30s %-15s %-25s %-1s \n", count, p.getName(), format.format(p.getPrice()), p.getDatePost(), p.getScoreRating());
+            System.out.printf("\t\t\t\t\t\t%-5s %-30s %-20s %-25s %-1s \n", count, p.getName(), format.format(p.getPrice()), p.getDatePost(), p.getScoreRating());
         }
         System.out.println("\t\t\t\t\t\t------------------------------------------------------------------------------------------");
 
@@ -94,7 +95,7 @@ public class ProductRp implements IProduct {
 
     @Override
     public void search(String name) {
-        Locale locale = new Locale("vi", "VN");
+        Locale locale = new Locale("en", "US");
         NumberFormat format = NumberFormat.getCurrencyInstance(locale);
         format.setRoundingMode(RoundingMode.HALF_UP);
         ArrayList<Product> listProduct = readFile.read(ReadAndWriteFileProduct.filePath);
@@ -123,7 +124,7 @@ public class ProductRp implements IProduct {
 
     @Override
     public void searchSuggestions(String name) {
-        Locale locale = new Locale("vi", "VN");
+        Locale locale = new Locale("en", "US");
         NumberFormat format = NumberFormat.getCurrencyInstance(locale);
         format.setRoundingMode(RoundingMode.HALF_UP);
         ArrayList<Product> listProduct = readFile.read(ReadAndWriteFileProduct.filePath);
@@ -137,9 +138,9 @@ public class ProductRp implements IProduct {
             String nameProduct = p.getName();
             float percentWord = countWordAlike(name, nameProduct);
             float percentChar = countChar(name, nameProduct);
-            boolean case1=percentWord>30;
-            boolean cas2=(percentChar/3)>30;
-            boolean case3=(percentWord + percentChar/4)>60;
+            boolean case1 = percentWord > 30;
+            boolean cas2 = (percentChar / 3) > 30;
+            boolean case3 = (percentWord + percentChar / 4) > 60;
             if (case1 || cas2 || case3) {
                 checkProduct = true;
                 count++;
