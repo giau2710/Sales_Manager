@@ -30,7 +30,6 @@ public class TimeUtil {
     public static boolean checkDateFormat(String dateString) {
         SimpleDateFormat formatter = new SimpleDateFormat(DATE_PATTERN);
         try {
-//            fsdf
             formatter.setLenient(false);
             formatter.parse(dateString);
             return true;
