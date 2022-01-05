@@ -20,7 +20,7 @@ public class ReadAndWriteFile {
             bw.flush();
             fw.close();
         } catch (FileNotFoundException e) {
-            throw new IllegalArgumentException(path + "Khong hop le!");
+            throw new IllegalArgumentException(path + "Không hợp lệ!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -37,7 +37,7 @@ public class ReadAndWriteFile {
             bw.flush();
             fw.close();
         } catch (FileNotFoundException e) {
-            throw new IllegalArgumentException(path + "Khong hop le!");
+            throw new IllegalArgumentException(path + "Không hợp lệ!");
         } catch (IOException e) {
             e.printStackTrace();
 
@@ -47,7 +47,7 @@ public class ReadAndWriteFile {
         try {
             return (ArrayList<String>) Files.readAllLines(Paths.get(path));
         } catch (IOException e) {
-            throw new IllegalArgumentException(path + "Khong hop le!");
+            throw new IllegalArgumentException(path + "Không hợp lệ!");
         }
     }
 

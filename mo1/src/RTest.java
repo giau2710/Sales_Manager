@@ -41,6 +41,7 @@ public class RTest {
 //quan li khuyen mai va them supperAdmin
 //        System.out.println(list);
 //        us.addUser(Role.ADMIN);
+        us.addUser(Role.CUSTOMER);
 //        ps.searchProduct();
 //        bs.displayProductToCart();
 //        bs.displayProductBy();

@@ -26,10 +26,10 @@ public class LoginServices {
         int countLogin = 0;
         MainView mainView =new MainView();
         while ((TimeUtil.period(MainView.checkLoginTime) > 2 * 60)) {
-            System.out.println("Nhap tai khoan hoac so dien thoai:");
+            System.out.println("Nhập tài khoản hoặc số điện thoại:");
             System.out.print("\t➥ ");
             String options = inputs.nextLine();
-            System.out.println("Nhap mat khau:");
+            System.out.println("Nhập mật khẩu:");
             System.out.print("\t➥ ");
             String password = inputs.nextLine();
             if (ur.checkCustomer(options, password)) {
@@ -38,7 +38,7 @@ public class LoginServices {
                 return Role.CUSTOMER;
             } else if (ur.checkAdmin(options, password)) {
                 Admin adminCheck = ur.getAdmin(options);
-                System.out.println("Nhap email de dang nhap:");
+                System.out.println("Nhập email để đăng nhập:");
                 System.out.print("\t➥ ");
                 String email = inputs.nextLine();
                 if (email.equals(adminCheck.getEmail())) {
@@ -48,19 +48,19 @@ public class LoginServices {
                     System.out.println("\tSai email!");
                     countLogin += 1;
                     if (countLogin == 2) {
-                        System.out.println("\tBan da nhap qua 2 lan!");
-                        System.out.println("\tVui long dang nhap lai sau 2 phut!");
+                        System.out.println("\tBạn đã nhập quá '2' lần!");
+                        System.out.println("\tVui lòng nhập lại sau '2' phút!");
                         MainView.checkLoginTime = TimeUtil.getTimeNow();
                         mainView.useMain();
                         return null;
                     }
                 }
             } else {
-                System.out.println("\tTai khoan hoac mat khau sai!");
+                System.out.println("\tTài khoản, số điện thoại hoặc mật khẩu sai!");
                 countLogin += 1;
                 if (countLogin == 2) {
-                    System.out.println("\tBan da nhap qua 2 lan!");
-                    System.out.println("\tVui long dang nhap lai sau 2 phut!");
+                    System.out.println("\tBạn đã nhập quá '2' lần!");
+                    System.out.println("\tVui lòng nhập lại sau '2' phút!");
                     MainView.checkLoginTime = TimeUtil.getTimeNow();
                     mainView.useMain();
                     return null;
@@ -68,9 +68,9 @@ public class LoginServices {
             }
 
         }
-        System.out.println("\tBan da nhap sai qua so lan quy dinh!");
-        System.out.println("\tVui long dang nhap lai sau 2 phut ke tu:" + MainView.checkLoginTime);
-        System.out.println("\tThoi gian hien tai la:" + TimeUtil.getTimeNow());
+        System.out.println("\tBạn đã nhập sai quá số lần quy định!");
+        System.out.println("\tVui lòng nhập lại sau '2'phút kể từ:" + MainView.checkLoginTime);
+        System.out.println("\tThời gian hiện tại là:" + TimeUtil.getTimeNow());
         MainView.menu();
         return null;
     }

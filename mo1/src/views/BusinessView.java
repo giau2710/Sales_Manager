@@ -25,14 +25,14 @@ public class BusinessView {
         System.out.println("|           Menu Shopping              |");
         System.out.println("|--------------------------------------|");
         System.out.println("| 1.Mua                                |");
-        System.out.println("| 2.Them vao gio hang                  |");
-        System.out.println("| 3.Xem san pham da mua                |");
-        System.out.println("| 4.Xem san pham da them vao gio hang  |");
-        System.out.println("| 5.Chon ma khuyen mai                 |");
-        System.out.println("|                        10.Quay lai   |");
-        System.out.println("|                         0.Dang xuat  |");
+        System.out.println("| 2.Thêm vào giỏ hàng                  |");
+        System.out.println("| 3.Xem sản phẩm đã mua                |");
+        System.out.println("| 4.Xem sản phẩm đã thêm vào giỏ hàng  |");
+        System.out.println("| 5.Chọn mã khuyến mãi                 |");
+        System.out.println("|                        10.Quay lại   |");
+        System.out.println("|                         0.Đăng xuất  |");
         System.out.println("|--------------------------------------|");
-        System.out.println("Moi chon chuc nang:");
+        System.out.println("Mời chọn chức năng:");
         System.out.print("\t➥ ");
     }
 
@@ -40,8 +40,8 @@ public class BusinessView {
 
     public void business() throws ParseException {
         while (true) {
-            System.out.printf("\tCap do hien tai cua ban la: %.1f \n", userRepository.getCustomer(LoginServices.loginUsername).getLevel());
-            System.out.printf("\tBan se duoc giam 《 %s%%》khi mua san pham!\n", businessServices.saleOff(userRepository.getCustomer(LoginServices.loginUsername).getLevel()) * 100);
+            System.out.printf("\tCấp độ hiện tại của bạn là: %.1f \n", userRepository.getCustomer(LoginServices.loginUsername).getLevel());
+            System.out.printf("\tBạn sẽ được giảm 《 %s%%》khi mua sản phẩm!\n", businessServices.saleOff(userRepository.getCustomer(LoginServices.loginUsername).getLevel()) * 100);
             menu();
             String option = inputs.nextLine();
             switch (option) {
@@ -61,7 +61,7 @@ public class BusinessView {
                     businessServices.displayProductToCart();
                     break;
                 case "5":
-                    System.out.println("Chua hoan thanh!");
+                    System.out.println("Chưa hoàn thành!");
                     break;
                 case "10":
                     CustomerMenu customerMenu = new CustomerMenu();
@@ -71,7 +71,7 @@ public class BusinessView {
                     loginServices.logout();
                     return;
                 default:
-                    System.out.println("\tKhong co chuc nang nay!");
+                    System.out.println("\tKhông có chức năng này!");
                     break;
             }
         }

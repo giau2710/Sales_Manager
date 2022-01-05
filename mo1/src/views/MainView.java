@@ -15,12 +15,12 @@ public class MainView {
         System.out.println("\t|--------------------------------------|");
         System.out.println("\t|                 Menu                 |");
         System.out.println("\t|--------------------------------------|");
-        System.out.println("\t| 1.Khach tham quan                    |");
-        System.out.println("\t| 2.Dang nhap                          |");
-        System.out.println("\t| 3.Dang ky                            |");
-        System.out.println("\t|               0.Thoat chuong trinh   |");
+        System.out.println("\t| 1.Khách tham quan                    |");
+        System.out.println("\t| 2.Đăng nhập                          |");
+        System.out.println("\t| 3.Đăng ký                            |");
+        System.out.println("\t|               0.Thoát chương trình   |");
         System.out.println("\t|--------------------------------------|");
-        System.out.println("Moi chon chuc nang:");
+        System.out.println("Mời chọn chức năng:");
         System.out.print("\t➥ ");
     }
 
@@ -37,7 +37,7 @@ public class MainView {
                     input.nextLine();
                     break;
                 } catch (Exception e) {
-                    System.out.println("\tChuc nang phai la 1 so!");
+                    System.out.println("\tChức năng phải là 1 số!");
                     menu();
                 }
             }
@@ -55,7 +55,7 @@ public class MainView {
                 case 0:
                     System.exit(0);
                 default:
-                    System.out.println("\tKhong co chuc nang nay. Moi ban nhap dung chuc nang!");
+                    System.out.println("\tKhông có chức năng này. Mời bạn nhập đúng chức năng!");
                     menu();
                     break;
             }
@@ -65,7 +65,7 @@ public class MainView {
     }
 
     public void getGreeting() {
-        String greeting = "CHAO MUNG BAN DEN VOI SHOPRICH. KHACH HANG LA THUONG DE!";
+        String greeting = "CHÀO MỪNG BẠN ĐẾN VỚI SHOPRICH. KHÁCH HÀNG LÀ THƯỢNG ĐẾ!";
 //        char[] charGreeting = greeting.toCharArray();
 //        for (char cg : charGreeting) {
 //            System.out.print(cg);

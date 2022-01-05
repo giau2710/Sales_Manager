@@ -18,16 +18,16 @@ public class CustomerMenu {
         System.out.println("\t|--------------------------------------|");
         System.out.println("\t|           Menu UserCustomer          |");
         System.out.println("\t|--------------------------------------|");
-        System.out.println("\t| 1.Xem danh sach san pham             |");
-        System.out.println("\t| 2.Xem danh sach san pham moi         |");
-        System.out.println("\t| 3.Tim kiem san pham theo ten         |");
-        System.out.println("\t| 4.Gio hang                           |");
-        System.out.println("\t| 5.Thong tin khuyen mai               |");
-        System.out.println("\t| 6.Quan li ho so ca nhan              |");
-        System.out.println("\t| 7.Tim kiem theo gia                  |");
-        System.out.println("\t|                         0.Dang xuat  |");
+        System.out.println("\t| 1.Xem danh sách sản phẩm             |");
+        System.out.println("\t| 2.Xem danh sách sản phẩm mới         |");
+        System.out.println("\t| 3.Tìm kiếm sản phẩm                  |");
+        System.out.println("\t| 4.Giỏ hàng                           |");
+        System.out.println("\t| 5.Thông tin khuyến mãi               |");
+        System.out.println("\t| 6.Quản lí hồ sơ cá nhân              |");
+        System.out.println("\t| 7.Tìm kiếm theo giá                  |");
+        System.out.println("\t|                         0.Đăng xuất  |");
         System.out.println("\t|--------------------------------------|");
-        System.out.println("Moi chon chuc nang:");
+        System.out.println("Mời chọn chức năng:");
         System.out.print("\t➥ ");
     }
 
@@ -70,7 +70,7 @@ public class CustomerMenu {
                     loginServices.logout();
                     return;
                 default:
-                    System.out.println("\tKhong co chuc nang nay!");
+                    System.out.println("\tKhông có chức năng này!");
                     break;
             }
         }
@@ -84,13 +84,13 @@ public class CustomerMenu {
             System.out.println("\t|--------------------------------------|");
             System.out.println("\t|           Manage Profile             |");
             System.out.println("\t|--------------------------------------|");
-            System.out.println("\t| 1.Xem ho so ca nhan                  |");
-            System.out.println("\t| 2.Sua ho so ca nhan                  |");
-            System.out.println("\t| 3.Tong chi trong thang               |");
-            System.out.println("\t|                         10.Quay lai  |");
-            System.out.println("\t|                         0.Dang xuat  |");
+            System.out.println("\t| 1.Xem hồ sơ cá nhân                  |");
+            System.out.println("\t| 2.Sửa hồ sơ cá nhân                  |");
+            System.out.println("\t| 3.Tổng chi trong tháng               |");
+            System.out.println("\t|                         10.Quay lại  |");
+            System.out.println("\t|                         0.Đăng xuất  |");
             System.out.println("\t|--------------------------------------|");
-            System.out.println("Moi chon chuc nang:");
+            System.out.println("Mời chọn chức năng:");
             System.out.print("\t➥ ");
         }
 
@@ -119,7 +119,7 @@ public class CustomerMenu {
                         loginServices.logout();
                         return;
                     default:
-                        System.out.println("\tKhong co chuc nang nay!");
+                        System.out.println("\tKhông có chức năng này!");
                         break;
                 }
             }
@@ -127,11 +127,11 @@ public class CustomerMenu {
 
         public void viewProfile() {
             Customer customerView = userRepository.getCustomer(LoginServices.loginUsername);
-            System.out.println("\tHo va ten:        " + customerView.getFullName());
-            System.out.println("\tTen tai khoan:    " + customerView.getUsername());
-            System.out.println("\tMat khau:         " + "*************");
-            System.out.println("\tSo dien thoai:    0" + customerView.getPhoneNumber());
-            System.out.println("\tCap do:           " + customerView.getLevel());
+            System.out.println("\tHọ và tên:        " + customerView.getFullName());
+            System.out.println("\tTên tài khoản:    " + customerView.getUsername());
+            System.out.println("\tMật khẩu:         " + "*************");
+            System.out.println("\tSố điện thoại:    0" + customerView.getPhoneNumber());
+            System.out.println("\tCấp độ:           " + customerView.getLevel());
         }
     }
 }

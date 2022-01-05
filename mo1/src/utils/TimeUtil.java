@@ -54,15 +54,4 @@ public class TimeUtil {
 
     }
 
-    public static void main(String[] args) {
-        String timeLogin="20/01/2021 00:00:00";
-        System.out.println(period("25/12/2021 11:58:00"));
-
-        while ( period(timeLogin)>0){
-            System.out.println("duoc thuc hien");
-            timeLogin=getTimeNow();
-        }
-
-
-    }
 }

@@ -15,15 +15,15 @@ public class VisitorView {
         System.out.println("\t|--------------------------------------|");
         System.out.println("\t|              Menu Visitor            |");
         System.out.println("\t|--------------------------------------|");
-        System.out.println("\t| 1.Xem danh sach san pham             |");
-        System.out.println("\t| 2.Xem danh sach san pham moi         |");
-        System.out.println("\t| 3.Tim kiem san pham                  |");
-        System.out.println("\t| 4.Dang ky                            |");
-        System.out.println("\t| 5.Thong tin khuyen mai               |");
-        System.out.println("\t| 6.Gop y                              |");
-        System.out.println("\t|                         0.Quay lai   |");
+        System.out.println("\t| 1.Xem danh sách sản phẩm             |");
+        System.out.println("\t| 2.Xem danh sách sản phẩm mới         |");
+        System.out.println("\t| 3.Tìm kiếm sản phẩm                  |");
+        System.out.println("\t| 4.Đăng ký                            |");
+        System.out.println("\t| 5.Thông tin khuyến mãi               |");
+        System.out.println("\t| 6.Góp ý                              |");
+        System.out.println("\t|                         0.Quay lại   |");
         System.out.println("\t|--------------------------------------|");
-        System.out.println("Moi chon chuc nang:");
+        System.out.println("Mời chọn chức năng:");
         System.out.print("\t➥ ");
     }
 
@@ -59,17 +59,17 @@ public class VisitorView {
                     mainView.useMain();
                     return;
                 default:
-                    System.out.println("\tKhong co chuc nang nay!");
+                    System.out.println("\tKhông có chức năng này!");
                     break;
             }
         }
     }
 
     public void discountInformation() {
-        System.out.println("\t\t\t\t\t\t\tKHUYEN MAI");
-        System.out.println("\t\t\t1.Theo cap do");
-        System.out.println("\t\t-Cap do tinh theo thoi gian ban su dung chuong trinh va mua san pham!");
-        System.out.println("\t\t-Su dung 10s se len 1 cap va mua san pham tren 50 trieu len 2 cap!");
+        System.out.println("\t\t\t\t\t\t\tKHUYẾN MÃI");
+        System.out.println("\t\t\t1.Theo cấp độ");
+        System.out.println("\t\t-Cấp độ tính theo thời gian bạn sử dụng chương trình và mua sản phẩm!");
+        System.out.println("\t\t-Sử dụng 10s sẽ lên 1 cấp và mua sản phẩm trên 50 triệu lên 2 cấp!");
         System.out.println("10-19 : 2%");
         System.out.println("20-29 : 4%");
         System.out.println("30-39 : 6%");
@@ -80,7 +80,7 @@ public class VisitorView {
         System.out.println("80-89 : 16%");
         System.out.println("90-99 : 18%");
         System.out.println("Tu 100 tro len : 20%");
-        System.out.println("\t\t\t2.theo ma giam gia");
-        System.out.println("\t\t-Moi ngay se co 1 ma giam gia ngau nhien co gia tri giam 20%!");
+        System.out.println("\t\t\t2.Theo mã giảm giá");
+        System.out.println("\t\t-Mỗi ngày sẽ có 1 mã giảm giá ngẫu nhiên có giá trị giảm 20%!");
     }
 }

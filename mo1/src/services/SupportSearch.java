@@ -23,9 +23,9 @@ public class SupportSearch {
             }
         });
         System.out.println("\t\t------------------------------------------------------------------------------------------------------------");
-        System.out.println("             •·.¸¸.·´¯`·.¸¸.•·.¸¸.·´¯`·.¸¸.•      DANH SACH SAN PHAM TIM KIEM     •·.¸¸.·´¯`·.¸¸.•·.¸¸.·´¯`·.¸¸.•           ");
+        System.out.println("             •·.¸¸.·´¯`·.¸¸.•·.¸¸.·´¯`·.¸¸.•      DANH SÁCH SẢN PHẨM TÌM KIẾM     •·.¸¸.·´¯`·.¸¸.•·.¸¸.·´¯`·.¸¸.•           ");
         System.out.println("\t\t------------------------------------------------------------------------------------------------------------");
-        System.out.printf("\t\t%-5s %-10s %-30s %-20s %-25s %-1s \n", "STT", "DINH DANH", "TEN", "GIA (VND)", "NGAY DANG", "DIEM DANH GIA");
+        System.out.printf("\t\t%-5s %-10s %-30s %-20s %-25s %-1s \n", "STT", "ID", "TÊN", "GIÁ (VND)", "NGÀY ĐĂNG", "ĐIỂM ĐÁNH GIÁ");
         int count = 0;
         for (Product p : listProduct) {
             if (p.getPrice() > startPrice && p.getPrice() < endPrice) {
@@ -46,12 +46,12 @@ public class SupportSearch {
         System.out.println("\t|--------------------------------------|");
         System.out.println("\t|            Search By Price           |");
         System.out.println("\t|--------------------------------------|");
-        System.out.println("\t| 1.Duoi 20 trieu                      |");
-        System.out.println("\t| 2.Tu 20-30 trieu                     |");
-        System.out.println("\t| 3.Tu 30-40 trieu                     |");
-        System.out.println("\t| 4.Tren 40 trieu                      |");
+        System.out.println("\t| 1.Dưới 20 triệu                      |");
+        System.out.println("\t| 2.Từ 20-30 triệu                     |");
+        System.out.println("\t| 3.Từ 30-40 triệu                     |");
+        System.out.println("\t| 4.Trên 40 triệu                      |");
         System.out.println("\t|--------------------------------------|");
-        System.out.println("Moi chon chuc nang:");
+        System.out.println("Mời chọn chức năng:");
         System.out.print("\t➥ ");
         String choose = inputs.nextLine();
         switch (choose) {
@@ -68,7 +68,7 @@ public class SupportSearch {
                 searchByPrice((int) (4 * Math.pow(10, 7))-1,(int) (10 * Math.pow(10, 10)));
                 break;
             default:
-                System.out.println("\tKhong co lua chon nay!");
+                System.out.println("\tKhông có lựa chọn này!");
         }
     }
 

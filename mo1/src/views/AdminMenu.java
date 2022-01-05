@@ -18,17 +18,17 @@ public class AdminMenu {
         System.out.println("\t|--------------------------------------|");
         System.out.println("\t|              Menu Admin              |");
         System.out.println("\t|--------------------------------------|");
-        System.out.println("\t| 1.Xem danh sach san pham             |");
-        System.out.println("\t| 2.Xem danh sach san pham moi         |");
-        System.out.println("\t| 3.Tim kiem san pham                  |");
-        System.out.println("\t| 4.Quan ly nguoi dung                 |");
-        System.out.println("\t| 5.Cap nhat san pham                  |");
-        System.out.println("\t| 6.Quan ly khuyen mai                 |");
-        System.out.println("\t| 7.Cap nhat ho so ca nhan             |");
-        System.out.println("\t| 8.Xem tong doanh thu                 |");
-        System.out.println("\t|                         0.Dang xuat  |");
+        System.out.println("\t| 1.Xem danh sách sản phẩm             |");
+        System.out.println("\t| 2.Xem danh sách sản phẩm mới         |");
+        System.out.println("\t| 3.Tìm kiếm sản phẩm                  |");
+        System.out.println("\t| 4.Quản lí người dùng                 |");
+        System.out.println("\t| 5.Cập nhật sản phẩm                  |");
+        System.out.println("\t| 6.Quản lí khuyến mãi                 |");
+        System.out.println("\t| 7.Cập nhật hồ sơ cá nhân             |");
+        System.out.println("\t| 8.Xem tổng doanh thu                 |");
+        System.out.println("\t|                         0.Đăng xuất  |");
         System.out.println("\t|--------------------------------------|");
-        System.out.println("Moi chon chuc nang:");
+        System.out.println("Mời chọn chức năng:");
         System.out.print("\t➥ ");
     }
 
@@ -71,7 +71,7 @@ public class AdminMenu {
                     loginServices.logout();
                     return;
                 default:
-                    System.out.println("\tKhong co chuc nang nay!");
+                    System.out.println("\tKhông có chức năng này!");
                     break;
             }
         }
@@ -80,11 +80,11 @@ public class AdminMenu {
     public void viewProfile() throws ParseException {
         UserRepository userRepository = new UserRepository();
         Admin adminView = userRepository.getAdmin(LoginServices.loginUsername);
-        System.out.println("\tHo va ten        :" + adminView.getFullName());
-        System.out.println("\tTen tai khoan    :" + adminView.getUsername());
-        System.out.println("\tMat khau         :" + "*************");
-        System.out.println("\tSo dien thoai    :0" + adminView.getPhoneNumber());
-        System.out.println("\tNgay sinh        :" + TimeUtil.dateToString(adminView.getBirthdate()));
+        System.out.println("\tHọ và tên        :" + adminView.getFullName());
+        System.out.println("\tTên tài khoản    :" + adminView.getUsername());
+        System.out.println("\tMật khẩu         :" + "*************");
+        System.out.println("\tSố điện thoại    :0" + adminView.getPhoneNumber());
+        System.out.println("\tNgày sinh        :" + TimeUtil.dateToString(adminView.getBirthdate()));
         System.out.println("\tEmail            :" + adminView.getEmail());
     }
 
@@ -97,13 +97,13 @@ public class AdminMenu {
             System.out.println("\t|--------------------------------------|");
             System.out.println("\t|           Manage Customer            |");
             System.out.println("\t|--------------------------------------|");
-            System.out.println("\t| 1.Xem danh sach nguoi dung           |");
-            System.out.println("\t| 2.Tim kiem nguoi dung                |");
-            System.out.println("\t| 3.Sua thong tin nguoi dung           |");
-            System.out.println("\t|                         10.Quay lai  |");
-            System.out.println("\t|                         0.Dang xuat  |");
+            System.out.println("\t| 1.Xem danh sách ngườii dùng          |");
+            System.out.println("\t| 2.Tìm kiếm người dùng                |");
+            System.out.println("\t| 3.Sủa thông tin người dùng           |");
+            System.out.println("\t|                         10.Quay lại  |");
+            System.out.println("\t|                         0.Đăng xuất  |");
             System.out.println("\t|--------------------------------------|");
-            System.out.println("Moi chon chuc nang:");
+            System.out.println("Mời chọn chức năng:");
             System.out.print("\t➥ ");
         }
 
@@ -132,7 +132,7 @@ public class AdminMenu {
                         mainView.useMain();
                         return;
                     default:
-                        System.out.println("\tKhong co chuc nang nay!");
+                        System.out.println("\tKhông có chức năng này!");
                         break;
                 }
             }
