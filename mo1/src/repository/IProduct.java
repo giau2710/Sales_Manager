@@ -1,13 +1,18 @@
 package repository;
 
-public interface IProduct {
-    void add();
-    void remove();
-    void update();
-    void list();
-    void search(String name);
-    void searchSuggestions(String name);
+import model.Product;
 
+import java.util.ArrayList;
+
+public interface IProduct {
+    void add(Product newProduct);
+
+    void remove(String name);
+
+    void update( Product product,String name);
+
+    void show();
+    void search(ArrayList<Product> listProductSearch);
 }
 
 
