@@ -30,10 +30,10 @@ public class ProductRepository implements IProduct {
     }
 
     @Override
-    public void update(Product product, String nameInput) {
+    public void update(Product product, String options) {
         ArrayList<Product> listProduct = getListProduct();
         for (int i = 0; i < listProduct.size(); i++) {
-            if (listProduct.get(i).getName().equalsIgnoreCase(nameInput)) {
+            if (listProduct.get(i).getName().equalsIgnoreCase(options)||listProduct.get(i).getId().equals(options)) {
                 listProduct.set(i, product);
                 ReadAndWriteFile.writeClear(filePath, listProduct);
                 break;

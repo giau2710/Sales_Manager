@@ -18,6 +18,7 @@ public class MainView {
         System.out.println("\t| 1.Khách tham quan                    |");
         System.out.println("\t| 2.Đăng nhập                          |");
         System.out.println("\t| 3.Đăng ký                            |");
+        System.out.println("\t| 4.Thông tin SHOPRICH                 |");
         System.out.println("\t|               0.Thoát chương trình   |");
         System.out.println("\t|--------------------------------------|");
         System.out.println("Mời chọn chức năng:");
@@ -52,6 +53,9 @@ public class MainView {
                 case 3:
                     userServices.addUser(Role.CUSTOMER);
                     useMain();
+                case 4:
+                    informationShop();
+                    break;
                 case 0:
                     System.exit(0);
                 default:
@@ -79,4 +83,7 @@ public class MainView {
         System.out.println(greeting);
     }
 
+    public void informationShop(){
+        System.out.println("SHOPRICH thành lập ngày 01/01/2021!");
+    }
 }

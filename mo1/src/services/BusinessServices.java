@@ -58,6 +58,47 @@ public class BusinessServices {
             }
         }
         productBy = pr.getProduct(id);
+//kiểm tra trạng thái sản phẩm
+        String check;
+        switch (productBy.getProductStatus()) {
+            case STOP_BUSINESS:
+                System.out.println("\tSản phẩm đã ngừng kinh doanh!");
+                System.out.println("\tNhập 'Y' để mua sản phẩm khác hoặc khác 'Y' để thoát mua!");
+                System.out.print("\t➥ ");
+                check = inputs.nextLine();
+                if (check.equalsIgnoreCase("Y")) {
+                    buyProduct();
+                    break;
+                } else {
+                    return;
+                }
+            case OUT_OF_STOCK:
+                System.out.println("\tSản phẩm này đã hết hàng!");
+                System.out.println("\tNhập 'Y' để mua sản phẩm khác hoặc khác 'Y' để thoát mua!");
+                System.out.print("\t➥ ");
+                check = inputs.nextLine();
+                if (check.equalsIgnoreCase("Y")) {
+                    buyProduct();
+                    break;
+                } else {
+                    return;
+                }
+            case STOCKING:
+                break;
+            case COMING_SOON:
+                System.out.println("\tSản phẩm này sắp có!");
+                System.out.println("\tNhập 'Y' để đặt trước, 'N' để mua sản phẩm khác!");
+                System.out.println("\tNhập khác 'Y' và 'N' để thoát mua!");
+                System.out.print("\t➥ ");
+                check = inputs.nextLine();
+                if (check.equalsIgnoreCase("Y")) {
+                    break;
+                } else if(check.equalsIgnoreCase("N")) {
+                    buyProduct();
+                }else {
+                    return;
+                }
+        }
 //So luong muon mua
         int quantity;
         while (true) {
@@ -121,8 +162,8 @@ public class BusinessServices {
                     } else {
                         System.out.println("\tBạn đã mua sản phẩm! CTV sẽ liên hệ với bạn sau!");
                         br.updateBoughtProduct(id, quantity, scoreRating);
-                        ShoppingCart shoppingCart = new ShoppingCart(LoginServices.loginUsername, id, productBy.getName(), quantity, sumPriceAfterSaleOff, TimeUtil.getTimeNow());
-                        br.AddProductBought(filePathBuy, shoppingCart);
+                        ShoppingCart shoppingCart = new ShoppingCart(LoginServices.loginUsername, id, productBy.getName(), quantity, sumPriceAfterSaleOff, TimeUtil.getTimeNow(), productBy.getProductStatus());
+                        br.addProductBought(filePathBuy, shoppingCart);
                         br.removeProductShoppingCart(id);
                         return;
                     }
@@ -133,8 +174,8 @@ public class BusinessServices {
                 System.out.println("\tBạn đã mua sản phẩm! CTV sẽ liên hệ với bạn sau!");
                 double scores = -1;
                 br.updateBoughtProduct(id, quantity, scores);
-                ShoppingCart shoppingCart = new ShoppingCart(LoginServices.loginUsername, id, productBy.getName(), quantity, sumPriceAfterSaleOff, TimeUtil.getTimeNow());
-                br.AddProductBought(filePathBuy, shoppingCart);
+                ShoppingCart shoppingCart = new ShoppingCart(LoginServices.loginUsername, id, productBy.getName(), quantity, sumPriceAfterSaleOff, TimeUtil.getTimeNow(), productBy.getProductStatus());
+                br.addProductBought(filePathBuy, shoppingCart);
                 br.removeProductShoppingCart(id);
                 return;
             } else System.out.println("\tBạn đã nhập sai chức năng vui long nhập lại!");
@@ -167,7 +208,7 @@ public class BusinessServices {
             System.out.println("\tId này không tồn tại sản phẩm!");
         } else {
             Product productBy = pr.getProduct(idProduct);
-            ShoppingCart shoppingCart = new ShoppingCart(LoginServices.loginUsername, productBy.getId(), productBy.getName(), productBy.getQuantity(), productBy.getPrice(), TimeUtil.getTimeNow());
+            ShoppingCart shoppingCart = new ShoppingCart(LoginServices.loginUsername, productBy.getId(), productBy.getName(), productBy.getQuantity(), productBy.getPrice(), TimeUtil.getTimeNow(), productBy.getProductStatus());
             ArrayList<ShoppingCart> list = br.getListProductBought(filePathShoppingCart);
             for (ShoppingCart s : list) {
                 if (s.getProductId().equals(idProduct) && s.getUsername().equals(LoginServices.loginUsername)) {
@@ -178,7 +219,7 @@ public class BusinessServices {
                     return;
                 }
             }
-            br.AddProductBought(filePathShoppingCart, shoppingCart);
+            br.addProductBought(filePathShoppingCart, shoppingCart);
             System.out.println("\tBạn đã thêm sản phẩm vào giỏ hàng!");
         }
     }

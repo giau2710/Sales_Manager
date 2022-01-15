@@ -20,11 +20,11 @@ public class CustomerMenu {
         System.out.println("\t|--------------------------------------|");
         System.out.println("\t| 1.Xem danh sách sản phẩm             |");
         System.out.println("\t| 2.Xem danh sách sản phẩm mới         |");
-        System.out.println("\t| 3.Tìm kiếm sản phẩm                  |");
-        System.out.println("\t| 4.Giỏ hàng                           |");
-        System.out.println("\t| 5.Thông tin khuyến mãi               |");
-        System.out.println("\t| 6.Quản lí hồ sơ cá nhân              |");
-        System.out.println("\t| 7.Tìm kiếm theo giá                  |");
+        System.out.println("\t| 3.Tìm kiếm sản phẩm theo tên         |");
+        System.out.println("\t| 4.Tìm kiếm sản phẩm theo giá         |");
+        System.out.println("\t| 5.Giỏ hàng                           |");
+        System.out.println("\t| 6.Thông tin khuyến mãi               |");
+        System.out.println("\t| 7.Quản lí hồ sơ cá nhân              |");
         System.out.println("\t|                         0.Đăng xuất  |");
         System.out.println("\t|--------------------------------------|");
         System.out.println("Mời chọn chức năng:");
@@ -50,21 +50,21 @@ public class CustomerMenu {
                     productServices.searchProduct();
                     break;
                 case "4":
+                    SupportSearch supportSearch = new SupportSearch();
+                    supportSearch.useSearchByPrice();
+                    break;
+                case "5":
                     loginServices.updateLevelLogin();
                     BusinessView businessView = new BusinessView();
                     businessView.business();
                     break;
-                case "5":
+                case "6":
                     VisitorView visitorView = new VisitorView();
                     visitorView.discountInformation();
                     break;
-                case "6":
+                case "7":
                     ProfileView profileView = new ProfileView();
                     profileView.optionMenuProfile();
-                    break;
-                case "7":
-                    SupportSearch supportSearch = new SupportSearch();
-                    supportSearch.useSearchByPrice();
                     break;
                 case "0":
                     loginServices.logout();

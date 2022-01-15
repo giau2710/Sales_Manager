@@ -22,22 +22,22 @@ public class SupportSearch {
                 return p2.getPrice() - p1.getPrice();
             }
         });
-        System.out.println("\t\t------------------------------------------------------------------------------------------------------------");
-        System.out.println("             •·.¸¸.·´¯`·.¸¸.•·.¸¸.·´¯`·.¸¸.•      DANH SÁCH SẢN PHẨM TÌM KIẾM     •·.¸¸.·´¯`·.¸¸.•·.¸¸.·´¯`·.¸¸.•           ");
-        System.out.println("\t\t------------------------------------------------------------------------------------------------------------");
-        System.out.printf("\t\t%-5s %-10s %-30s %-20s %-25s %-1s \n", "STT", "ID", "TÊN", "GIÁ (VND)", "NGÀY ĐĂNG", "ĐIỂM ĐÁNH GIÁ");
+        System.out.println("\t\t--------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("                   •·.¸¸.·´¯`·.¸¸.•·.¸¸.·´¯`·.¸¸.•      DANH SÁCH SẢN PHẨM TÌM KIẾM     •·.¸¸.·´¯`·.¸¸.•·.¸¸.·´¯`·.¸¸.•           ");
+        System.out.println("\t\t--------------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("\t\t%-5s %-10s %-30s %-20s %-25s %-13s %-1s \n", "STT", "ID", "TÊN", "GIÁ (VND)", "NGÀY ĐĂNG","TRẠNG THÁI", "ĐIỂM ĐÁNH GIÁ");
         int count = 0;
         for (Product p : listProduct) {
             if (p.getPrice() > startPrice && p.getPrice() < endPrice) {
                 count += 1;
                 if (p.getScoreRating() == 0) {
-                    System.out.printf("\t\t%-5s %-10s %-30s %-20s %-25s \n", count, p.getId(), p.getName(), MoneyFormat.getMoneyFormat(p.getPrice()), p.getDatePost());
+                    System.out.printf("\t\t%-5s %-10s %-30s %-20s %-25s %-13s \n", count, p.getId(), p.getName(), MoneyFormat.getMoneyFormat(p.getPrice()), p.getDatePost(),p.getProductStatus());
 
                 } else
-                    System.out.printf("\t\t%-5s %-10s %-30s %-20s %-25s %.1f \n", count, p.getId(), p.getName(), MoneyFormat.getMoneyFormat(p.getPrice()), p.getDatePost(), p.getScoreRating());
+                    System.out.printf("\t\t%-5s %-10s %-30s %-20s %-25s %-13s %.1f \n", count, p.getId(), p.getName(), MoneyFormat.getMoneyFormat(p.getPrice()), p.getDatePost(),p.getProductStatus(), p.getScoreRating());
             }
         }
-        System.out.println("\t\t------------------------------------------------------------------------------------------------------------");
+        System.out.println("\t\t--------------------------------------------------------------------------------------------------------------------------");
         System.out.println();
 
     }

@@ -1,35 +1,35 @@
-RTV283;iPhone 13 Pro;29900000;6000;05/01/2022 15:33:31;0;0.0;sap co noi dung
-RTV283;iPhone 13 Pro;29900000;324;24/12/2021 20:28:20;0;0.0;chưa có nội dung
-UVR802;IPhone 12 Mini;15490000;649;24/12/2021 20:26:31;1;6.0;chưa có nội dung
-NGG795;iPhone SE (2020);12990000;320;24/12/2021 20:26:12;1;6.0;chưa có nội dung
-YGW512;MacBook Air M1 2020;37490000;313;24/12/2021 20:24:55;1;9.0;chưa có nội dung
-GRL935;MacBook Pro 14 M1 Max 2021;87900000;654;24/12/2021 20:23:03;0;0.0;chưa có nội dung
-BUE735;MacBook Pro 16 M1 Max 2021;90990000;640;24/12/2021 20:21:08;4;5.5;chưa có nội dung
-BTV021;Laptop Dell Gaming G3 i7;31990000;658;24/12/2021 01:39:19;0;0.0;chưa có nội dung
-GPO559;Laptop Dell Gaming G15 5515;3099000;644;24/12/2021 01:41:19;1;6.0;chưa có nội dung
-DAU083;Laptop Dell Latitude 3520 i5;24690000;654;24/12/2021 01:42:19;0;0.0;chưa có nội dung
-TRD159;Laptop Dell Vostro 5415;21190000;659;23/12/2021 10:44:01;0;0.0;chưa có nội dung
-JOY099;Laptop Dell Vostro 3400;25990000;750;23/12/2021 10:43:34;0;0.0;chưa có nội dung
-CJK031;Laptop Dell Inspiron 15;26490000;987;23/12/2021 10:42:25;0;0.0;chưa có nội dung
-FWU283;Laptop Dell Inspiron 15 3511;26490000;226;23/12/2021 10:41:54;1;6.0;chưa có nội dung
-SOB047;Laptop Dell Inspiron 14;27290000;546;23/12/2021 10:41:31;0;0.0;chưa có nội dung
-CTW410;Laptop Dell Inspiron 7501;30490000;326;22/12/2021 23:26:31;0;0.0;chưa có nội dung
-JKL943;Laptop Dell Latitude 3520;30990000;321;22/12/2021 23:26:13;0;0.0;chưa có nội dung
-THX610;Laptop Dell Gaming G15;25990000;223;22/12/2021 23:25:49;2;7.5;chưa có nội dung
-RFH088;Macbook Pro M1 2020;42990000;563;22/12/2021 23:19:21;0;0.0;chưa có nội dung
-DWU674;MacBook Pro 16 inch M1 Pro;69900000;123;22/12/2021 23:18:41;0;0.0;chưa có nội dung
-GQB115;Rolex 18048 Yellow Gold;315000000;223;22/12/2021 23:10:22;0;0.0;chưa có nội dung
-NBA602;Vertu Signature S Rose Gold;210000000;5646;22/12/2021 23:08:47;0;0.0;chưa có nội dung
-TAL748;Vertu Signature S Clous;560000000;45;22/12/2021 23:06:03;0;0.0;chưa có nội dung
-URE563;Samsung Galaxy Tab S7;18990000;56;22/12/2021 22:53:46;0;0.0;chưa có nội dung
-IEU993;Samsung Galaxy Note 20;15990000;100;22/12/2021 22:38:58;0;0.0;chưa có nội dung
-LJT749;Samsung Galaxy Z Flip3 5G;24990000;100;22/12/2021 22:37:20;0;0.0;chưa có nội dung
-KKN822;Samsung Galaxy S21 Ultra 5G;25990000;100;22/12/2021 22:36:37;0;0.0;chưa có nội dung
-STG677;Samsung Galaxy A52;8990000;100;22/12/2021 22:36:21;0;0.0;chưa có nội dung
-TYA299;Samsung Galaxy A32;6290000;95;22/12/2021 22:35:19;1;5.0;chưa có nội dung
-DWX951;Samsung Galaxy Z Fold3;41990000;100;22/12/2021 22:34:16;0;0.0;chưa có nội dung
-RFL711;Iphone XR;14900000;95;22/12/2021 22:31:51;1;5.0;chưa có nội dung
-HIU481;Iphone 13 Mini;20490000;95;22/12/2021 22:29:23;1;6.0;chưa có nội dung
-QTP437;Iphone 13 Pro Max;33290000;2313;20/12/2021 18:48:52;6;5.0;chưa có nội dung
-AOY221;Iphone 11 Pro;15490000;1;20/12/2021 18:47:55;1;9.0;chưa có nội dung
-RZW912;Iphone 12 Pro Max;31490000;26;20/12/2021 18:43:18;1;5.0;chưa có nội dung
+RTV283;iPhone 13 Pro;29900000;5976;05/01/2022 15:33:31;2;7.5;chưa có nội dung;STOCKING
+o;iPhone 13 Pro;29900000;324;24/12/2021 20:28:20;0;0.0;chưa có nội dung;STOP_BUSINESS
+UVR802;IPhone 12 Mini;15490000;649;24/12/2021 20:26:31;1;6.0;chưa có nội dung;OUT_OF_STOCK
+NGG795;iPhone SE (2020);12990000;320;24/12/2021 20:26:12;1;6.0;chưa có nội dung;STOCKING
+YGW512;222222;22222222;2222;14/01/2022 14:12:33;3;6.333333333333333;22222222222222222222;COMING_SOON
+GRL935;MacBook Pro 14 M1 Max 2021;87900000;654;24/12/2021 20:23:03;0;0.0;chưa có nội dung;COMING_SOON
+BUE735;MacBook Pro 16 M1 Max 2021;90990000;640;24/12/2021 20:21:08;4;5.5;chưa có nội dung;STOCKING
+BTV021;Laptop Dell Gaming G3 i7;31990000;658;24/12/2021 01:39:19;0;0.0;chưa có nội dung;STOCKING
+GPO559;Laptop Dell Gaming G15 5515;3099000;644;24/12/2021 01:41:19;1;6.0;chưa có nội dung;STOCKING
+DAU083;Laptop Dell Latitude 3520 i5;24690000;654;24/12/2021 01:42:19;0;0.0;chưa có nội dung;STOCKING
+TRD159;Laptop Dell Vostro 5415;21190000;659;23/12/2021 10:44:01;0;0.0;chưa có nội dung;STOCKING
+JOY099;Laptop Dell Vostro 3400;25990000;750;23/12/2021 10:43:34;0;0.0;chưa có nội dung;STOCKING
+CJK031;Laptop Dell Inspiron 15;26490000;987;23/12/2021 10:42:25;0;0.0;chưa có nội dung;STOCKING
+FWU283;Laptop Dell Inspiron 15 3511;26490000;226;23/12/2021 10:41:54;1;6.0;chưa có nội dung;STOCKING
+SOB047;Laptop Dell Inspiron 14;27290000;546;23/12/2021 10:41:31;0;0.0;chưa có nội dung;STOCKING
+CTW410;Laptop Dell Inspiron 7501;30490000;326;22/12/2021 23:26:31;0;0.0;chưa có nội dung;STOCKING
+JKL943;Laptop Dell Latitude 3520;30990000;321;22/12/2021 23:26:13;0;0.0;chưa có nội dung;STOCKING
+THX610;Laptop Dell Gaming G15;25990000;223;22/12/2021 23:25:49;2;7.5;chưa có nội dung;STOCKING
+RFH088;Macbook Pro M1 2020;42990000;563;22/12/2021 23:19:21;0;0.0;chưa có nội dung;STOCKING
+DWU674;MacBook Pro 16 inch M1 Pro;69900000;123;22/12/2021 23:18:41;0;0.0;chưa có nội dung;STOCKING
+GQB115;Rolex 18048 Yellow Gold;315000000;223;22/12/2021 23:10:22;0;0.0;chưa có nội dung;STOCKING
+NBA602;Vertu Signature S Rose Gold;210000000;5646;22/12/2021 23:08:47;0;0.0;chưa có nội dung;STOCKING
+TAL748;Vertu Signature S Clous;560000000;45;22/12/2021 23:06:03;0;0.0;chưa có nội dung;STOCKING
+URE563;Samsung Galaxy Tab S7;18990000;56;22/12/2021 22:53:46;0;0.0;chưa có nội dung;STOCKING
+IEU993;Samsung Galaxy Note 20;15990000;100;22/12/2021 22:38:58;0;0.0;chưa có nội dung;STOCKING
+LJT749;Samsung Galaxy Z Flip3 5G;24990000;100;22/12/2021 22:37:20;0;0.0;chưa có nội dung;STOCKING
+KKN822;Samsung Galaxy S21 Ultra 5G;25990000;100;22/12/2021 22:36:37;0;0.0;chưa có nội dung;STOCKING
+STG677;Samsung Galaxy A52;8990000;100;22/12/2021 22:36:21;0;0.0;chưa có nội dung;STOCKING
+TYA299;Samsung Galaxy A32;6290000;95;22/12/2021 22:35:19;1;5.0;chưa có nội dung;STOCKING
+DWX951;Samsung Galaxy Z Fold3;41990000;100;22/12/2021 22:34:16;0;0.0;chưa có nội dung;STOCKING
+RFL711;Iphone XR;14900000;95;22/12/2021 22:31:51;1;5.0;chưa có nội dung;STOCKING
+HIU481;Iphone 13 Mini;20490000;95;22/12/2021 22:29:23;1;6.0;chưa có nội dung;STOCKING
+QTP437;Iphone 13 Pro Max;33290000;2313;20/12/2021 18:48:52;6;5.0;chưa có nội dung;STOCKING
+AOY221;Iphone 11 Pro;15490000;1;20/12/2021 18:47:55;1;9.0;chưa có nội dung;STOCKING
+RZW912;Iphone 12 Pro Max;31490000;26;20/12/2021 18:43:18;1;5.0;chưa có nội dung;STOCKING

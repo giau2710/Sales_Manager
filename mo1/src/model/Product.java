@@ -11,17 +11,19 @@ public class Product implements Comparable<Product> {
     private double scoreRating;
     private int numberOfReviews;
     private String details;
+    private ProductStatus productStatus;
 
     public Product() {
     }
 
-    public Product(String id, String name, int price, int quantity, String datePost, String details) {
+    public Product(String id, String name, int price, int quantity, String datePost, String details,ProductStatus productStatus) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
         this.datePost = datePost;
         this.details = details;
+        this.productStatus=productStatus;
     }
 
     public Product(String record) {
@@ -34,6 +36,7 @@ public class Product implements Comparable<Product> {
         numberOfReviews = Integer.parseInt(fields[5]);
         scoreRating = Double.parseDouble(fields[6]);
         details = fields[7];
+        productStatus=ProductStatus.valueOf(fields[8]);
     }
 
     public String getId() {
@@ -97,16 +100,24 @@ public class Product implements Comparable<Product> {
         this.details = details;
     }
 
+    public ProductStatus getProductStatus() {
+        return productStatus;
+    }
+
+    public void setProductStatus(ProductStatus productStatus) {
+        this.productStatus = productStatus;
+    }
+
     @Override
     public String toString() {
-        return id + ";" + name + ";" + price + ";" + quantity + ";" + datePost + ";" + numberOfReviews + ";" + scoreRating + ";" + details;
+        return id + ";" + name + ";" + price + ";" + quantity + ";" + datePost + ";" + numberOfReviews + ";" + scoreRating + ";" + details+";"+productStatus;
     }
 
     @Override
     public int compareTo(Product p) {
         if (this.getScoreRating() == p.getScoreRating()) {
-            return (int) (TimeUtil.period(this.getDatePost()) - TimeUtil.period(p.getDatePost()));
+            return (int) (TimeUtil.periodNow(p.getDatePost()) - TimeUtil.periodNow(this.getDatePost()));
         }
-        return Double.compare(this.getScoreRating(), p.getScoreRating());
+        return Double.compare(p.getScoreRating(), this.getScoreRating());
     }
 }

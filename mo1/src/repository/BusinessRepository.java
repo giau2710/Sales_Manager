@@ -14,17 +14,37 @@ public class BusinessRepository {
     ProductRepository pr = new ProductRepository();
     ProductServices ps = new ProductServices();
 
-    public void updateBoughtProduct(String idProduct, int quantityBuy, double scoreRating) {
+    public void updateBoughtProduct(String idProduct, int quantityBuy, double scoreRating) throws ParseException {
         Product productBought = pr.getProduct(idProduct);
         if (scoreRating == -1) {
             productBought.setQuantity(productBought.getQuantity() - quantityBuy);
-            pr.update(productBought, productBought.getName());
+            pr.update(productBought, productBought.getId());
         } else {
             productBought.setQuantity(productBought.getQuantity() - quantityBuy);
             productBought.setScoreRating(scoreRating);
             productBought.setNumberOfReviews(productBought.getNumberOfReviews() + 1);
-            pr.update(productBought, productBought.getName());
+            pr.update(productBought, productBought.getId());
         }
+    }
+
+    public void updateProductCart(ShoppingCart shoppingCart, String options) throws ParseException {
+        ArrayList<ShoppingCart> list = getListProductBought(filePathShoppingCart);
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getUsername().equalsIgnoreCase(options) || list.get(i).getProductId().equals(options)) {
+                list.set(i, shoppingCart);
+            }
+        }
+        ReadAndWriteFile.writeClear(filePathShoppingCart, list);
+    }
+
+    public ShoppingCart getProductCart(String options) throws ParseException {
+        ArrayList<ShoppingCart> list = getListProductBought(filePathShoppingCart);
+        for (ShoppingCart s : list) {
+            if (s.getProductName().equalsIgnoreCase(options) || s.getProductId().equals(options)) {
+                return s;
+            }
+        }
+        return null;
     }
 
     public boolean existProductShoppingCart(String id) throws ParseException {
@@ -37,7 +57,7 @@ public class BusinessRepository {
         return false;
     }
 
-    public void AddProductBought(String filePathBuy, ShoppingCart shoppingCart) throws ParseException {
+    public void addProductBought(String filePathBuy, ShoppingCart shoppingCart) throws ParseException {
         ArrayList<ShoppingCart> listProductBought = getListProductBought(filePathBuy);
         listProductBought.add(0, shoppingCart);
         ReadAndWriteFile.writeClear(filePathBuy, listProductBought);

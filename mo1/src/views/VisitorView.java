@@ -1,14 +1,15 @@
 package views;
 
 import model.Role;
+import services.LoginServices;
 import services.ProductServices;
+import services.SupportSearch;
 import services.UserServices;
-
 import java.text.ParseException;
 import java.util.Scanner;
 
 public class VisitorView {
-    public VisitorView() throws ParseException {
+    public VisitorView()  {
     }
 
     public static void menu() {
@@ -17,10 +18,12 @@ public class VisitorView {
         System.out.println("\t|--------------------------------------|");
         System.out.println("\t| 1.Xem danh sách sản phẩm             |");
         System.out.println("\t| 2.Xem danh sách sản phẩm mới         |");
-        System.out.println("\t| 3.Tìm kiếm sản phẩm                  |");
-        System.out.println("\t| 4.Đăng ký                            |");
-        System.out.println("\t| 5.Thông tin khuyến mãi               |");
-        System.out.println("\t| 6.Góp ý                              |");
+        System.out.println("\t| 3.Tìm kiếm sản phẩm theo tên         |");
+        System.out.println("\t| 4.Tìm kiếm sản phẩm theo giá         |");
+        System.out.println("\t| 5.Đăng ký                            |");
+        System.out.println("\t| 6.Đăng nhập                          |");
+        System.out.println("\t| 7.Thông tin khuyến mãi               |");
+        System.out.println("\t| 8.Hỗ trợ                             |");
         System.out.println("\t|                         0.Quay lại   |");
         System.out.println("\t|--------------------------------------|");
         System.out.println("Mời chọn chức năng:");
@@ -48,12 +51,21 @@ public class VisitorView {
                     productServices.searchProduct();
                     break;
                 case "4":
-                    userServices.addUser(Role.CUSTOMER);
+                    SupportSearch supportSearch=new SupportSearch();
+                    supportSearch.useSearchByPrice();
                     break;
                 case "5":
-                    discountInformation();
+                    userServices.addUser(Role.CUSTOMER);
                     break;
                 case "6":
+                    LoginServices loginServices=new LoginServices();
+                    loginServices.checkLogin(1);
+                    break;
+                case "7":
+                    discountInformation();
+                    break;
+                case "8":
+                    System.out.println("Chưa hoàn thành");
                     break;
                 case "0":
                     mainView.useMain();

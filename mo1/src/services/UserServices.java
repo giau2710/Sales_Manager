@@ -126,7 +126,7 @@ public class UserServices {
                         birthDate = TimeUtil.stringToDate(checkBirthDate);
                         break;
                     } else {
-                        System.out.println("\tBạn đã nhập sài ngày hoặc sai định dạng!");
+                        System.out.println("\tBạn đã nhập sai ngày hoặc sai định dạng!");
                     }
                 }
                 String email;

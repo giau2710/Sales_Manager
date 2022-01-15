@@ -41,9 +41,9 @@ public class TimeUtil {
     public static boolean checkBirthDate(String birthDate) throws ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat(DATE_PATTERN);
         long period = formatter.parse(getTimeNow()).getTime() - formatter.parse(birthDate).getTime();
-        return period > 0;
+        return period >= 0;
     }
-    public static long period(String options) {
+    public static long periodNow(String options) {
         //System.currentTimeMillis()
         String dateStop = TimeUtil.getTimeNow();
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
@@ -52,6 +52,22 @@ public class TimeUtil {
         final Duration between = Duration.between(start, stop);
         return between.get(ChronoUnit.SECONDS);
 
+    }
+
+    public static long period(String startTime,String endTime) {
+        //System.currentTimeMillis()
+
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        final LocalDateTime start = LocalDateTime.parse(startTime, formatter);
+        final LocalDateTime stop = LocalDateTime.parse(endTime, formatter);
+        final Duration between = Duration.between(start, stop);
+        return between.get(ChronoUnit.SECONDS);
+
+    }
+
+    public static void main(String[] args) throws ParseException {
+        System.out.println(checkBirthDate("15/01/2022"));
+        System.out.println(        period("23/10/2021 00:00:00","23/10/2021 00:01:00"));
     }
 
 }

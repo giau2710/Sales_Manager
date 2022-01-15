@@ -9,9 +9,10 @@ public interface IProduct {
 
     void remove(String name);
 
-    void update( Product product,String name);
+    void update(Product product, String name);
 
     void show();
+
     void search(ArrayList<Product> listProductSearch);
 }
 

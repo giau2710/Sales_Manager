@@ -25,7 +25,7 @@ public class LoginServices {
     public Role login() throws ParseException {
         int countLogin = 0;
         MainView mainView =new MainView();
-        while ((TimeUtil.period(MainView.checkLoginTime) > 2 * 60)) {
+        while ((TimeUtil.periodNow(MainView.checkLoginTime) > 2 * 60)) {
             System.out.println("Nhập tài khoản hoặc số điện thoại:");
             System.out.print("\t➥ ");
             String options = inputs.nextLine();
@@ -106,7 +106,7 @@ public class LoginServices {
     }
 
     public void updateLevelLogin() throws ParseException {
-        double periodUse = ((double) TimeUtil.period(LoginServices.loginStartTime) / 10);
+        double periodUse = ((double) TimeUtil.periodNow(LoginServices.loginStartTime) / 10);
         ur.updateLevel(LoginServices.loginUsername, periodUse);
         LoginServices.loginStartTime = TimeUtil.getTimeNow();
     }
