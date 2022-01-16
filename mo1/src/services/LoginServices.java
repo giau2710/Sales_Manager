@@ -13,11 +13,10 @@ import java.text.ParseException;
 import java.util.Scanner;
 
 public class LoginServices {
-    public static String loginUsername;
+    public static String loginUsername=null;
     public static String loginStartTime;
     Scanner inputs = new Scanner(System.in);
     UserRepository ur = new UserRepository();
-    BusinessServices businessServices = new BusinessServices();
 
     public LoginServices() throws ParseException {
     }

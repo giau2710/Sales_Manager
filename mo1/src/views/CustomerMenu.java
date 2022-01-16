@@ -1,13 +1,16 @@
 package views;
 
 import model.Customer;
+import model.ShoppingCart;
+import repository.BusinessRepository;
 import repository.UserRepository;
-import services.LoginServices;
-import services.ProductServices;
-import services.SupportSearch;
-import services.UserServices;
+import services.*;
+import utils.MoneyFormat;
+import utils.TimeUtil;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class CustomerMenu {
@@ -25,6 +28,7 @@ public class CustomerMenu {
         System.out.println("\t| 5.Giỏ hàng                           |");
         System.out.println("\t| 6.Thông tin khuyến mãi               |");
         System.out.println("\t| 7.Quản lí hồ sơ cá nhân              |");
+        System.out.println("\t| 8.Hỗ trợ                             |");
         System.out.println("\t|                         0.Đăng xuất  |");
         System.out.println("\t|--------------------------------------|");
         System.out.println("Mời chọn chức năng:");
@@ -66,6 +70,11 @@ public class CustomerMenu {
                     ProfileView profileView = new ProfileView();
                     profileView.optionMenuProfile();
                     break;
+                case "8":
+                    CustomerSupportServices customerSupportServices = new CustomerSupportServices();
+                    customerSupportServices.addSupport();
+                    menu();
+                    break;
                 case "0":
                     loginServices.logout();
                     return;
@@ -77,7 +86,7 @@ public class CustomerMenu {
     }
 
     public static class ProfileView {
-        public ProfileView() throws ParseException {
+        public ProfileView()  {
         }
 
         public void menu() {
@@ -96,9 +105,10 @@ public class CustomerMenu {
 
         UserServices userServices = new UserServices();
         UserRepository userRepository = new UserRepository();
+        BusinessRepository businessRepository = new BusinessRepository();
+        Scanner inputs = new Scanner(System.in);
 
         public void optionMenuProfile() throws ParseException {
-            Scanner inputs = new Scanner(System.in);
             while (true) {
                 menu();
                 String option = inputs.nextLine();
@@ -110,7 +120,7 @@ public class CustomerMenu {
                         userServices.updateUser();
                         break;
                     case "3":
-
+                        totalExpenditureForTheMonth();
                         break;
                     case "10":
                         return;
@@ -132,6 +142,32 @@ public class CustomerMenu {
             System.out.println("\tMật khẩu:         " + "*************");
             System.out.println("\tSố điện thoại:    0" + customerView.getPhoneNumber());
             System.out.println("\tCấp độ:           " + customerView.getLevel());
+        }
+
+        public void totalExpenditureForTheMonth() throws ParseException {
+            String revenueDate;
+            while (true) {
+                System.out.println("Nhập tháng năm muốn xem doanh thu (ví dụ:12/2021):");
+                System.out.print("\t➥ ");
+                revenueDate = inputs.nextLine();
+                revenueDate = "01/" + revenueDate;
+                if (TimeUtil.checkDateFormat(revenueDate) && TimeUtil.checkBirthDate(revenueDate)) {
+                    Date checkDate = TimeUtil.stringToDate(revenueDate);
+                    String[] fields = TimeUtil.dateToString(checkDate).split("/");
+                    revenueDate = fields[1] + "/" + fields[2];
+                    int sum = 0;
+                    ArrayList<ShoppingCart> list = businessRepository.getListProductBought(BusinessRepository.filePathBuy);
+                    for (ShoppingCart s : list) {
+                        if (s.getDateBy().contains(revenueDate) && LoginServices.loginUsername.equals(s.getUsername())) {
+                            sum += s.getSumPrice();
+                        }
+                    }
+                    System.out.printf("\tTổng chi tiêu của bạn tháng %s là: %s\n", revenueDate, MoneyFormat.getMoneyFormat(sum));
+                    return;
+                } else {
+                    System.out.println("\tBạn đã nhập sai ngày hoặc sai định dạng!");
+                }
+            }
         }
     }
 }

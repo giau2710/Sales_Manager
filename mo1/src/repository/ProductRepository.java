@@ -16,18 +16,6 @@ public class ProductRepository implements IProduct {
         ReadAndWriteFile.writeClear(filePath, listProduct);
     }
 
-    @Override
-    public void remove(String nameRemove) {
-        ArrayList<Product> listProduct = getListProduct();
-        for (Product p : listProduct) {
-            if (nameRemove.equalsIgnoreCase(p.getName())) {
-                listProduct.remove(p);
-                ReadAndWriteFile.write(filePath, listProduct);
-                break;
-            }
-        }
-
-    }
 
     @Override
     public void update(Product product, String options) {
@@ -40,15 +28,6 @@ public class ProductRepository implements IProduct {
 
             }
         }
-
-    }
-
-    @Override
-    public void search(ArrayList<Product> listProductSearch) {
-    }
-
-    @Override
-    public void show() {
 
     }
 

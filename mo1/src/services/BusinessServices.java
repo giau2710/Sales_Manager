@@ -183,7 +183,7 @@ public class BusinessServices {
 
     }
 
-    public void displayProductBy() throws ParseException {
+    public void displayProductBy()  {
         ArrayList<ShoppingCart> listProductBy = br.getListProductBought(filePathBuy);
         System.out.println("\t-------------------------------------------------------------------------------------------------------------------");
         System.out.println("              •·.¸¸.·´¯`·.¸¸.•·.¸¸.·´¯`·.¸¸.•         SẢN PHẨM BẠN ĐÃ MUA        •·.¸¸.·´¯`·.¸¸.•·.¸¸.·´¯`·.¸¸.•    ");
@@ -200,7 +200,7 @@ public class BusinessServices {
         System.out.println();
     }
 
-    public void addProductToCart() throws ParseException {
+    public void addProductToCart()  {
         System.out.println("Nhập id sản phẩm cần thêm vào giỏ hàng:");
         System.out.print("\t➥ ");
         String idProduct = inputs.nextLine();

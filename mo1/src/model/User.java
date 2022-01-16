@@ -1,6 +1,6 @@
 package model;
 
-public class User  {
+public class User {
     protected String fullName;
     protected String username;
     protected String password;
@@ -23,9 +23,6 @@ public class User  {
         return fullName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
 
     public String getUsername() {
         return username;
@@ -51,16 +48,9 @@ public class User  {
         this.phoneNumber = phoneNumber;
     }
 
-    public Role getUserType() {
-        return role;
-    }
-
-    public void setUserType(Role role) {
-        this.role = role;
-    }
 
     @Override
     public String toString() {
-        return fullName +";" +username+";"+ password +";" +"0"+phoneNumber +";" + role +";";
+        return fullName + ";" + username + ";" + password + ";" + "0" + phoneNumber + ";" + role + ";";
     }
 }

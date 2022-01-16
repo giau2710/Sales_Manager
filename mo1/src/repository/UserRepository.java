@@ -3,7 +3,7 @@ package repository;
 import model.Admin;
 import model.Customer;
 import model.Role;
-import model.User;
+import utils.HashingPassword;
 import utils.ReadAndWriteFile;
 
 import java.text.ParseException;
@@ -25,31 +25,7 @@ public class UserRepository implements IUser {
     }
 
 
-    @Override
-    public void remove(String username, Role role) throws ParseException {
-        ArrayList<Customer> listCustomer = getListCustomer();
-        ArrayList<Admin> listAdmin = getListAdmins();
-        switch (role) {
-            case CUSTOMER:
-                for (Customer c : listCustomer) {
-                    if (username.equals(c.getUsername())) {
-                        listCustomer.remove(c);
-                        ReadAndWriteFile.writeClear(filePath, listCustomer);
-                        ReadAndWriteFile.write(filePath, listAdmin);
-                        break;
-                    }
-                }
-            case ADMIN:
-                for (Admin a : listAdmin) {
-                    if (username.equals(a.getUsername())) {
-                        listAdmin.remove(a);
-                        ReadAndWriteFile.writeClear(filePath, listCustomer);
-                        ReadAndWriteFile.write(filePath, listAdmin);
-                        break;
-                    }
-                }
-        }
-    }
+
 
     @Override
     public <T> void update(T obj, Role role, String username) throws ParseException {
@@ -90,23 +66,12 @@ public class UserRepository implements IUser {
         ReadAndWriteFile.write(filePath, listAdmin);
     }
 
-    @Override
-    public void list(User user) {
-
-    }
-
-    @Override
-    public void search(String options) {
-
-    }
-
-
     //    kiểm tra khách hàng có tồn tại (username hoặc sđt) và mật khẩu
     public boolean checkCustomer(String options, String password) {
         ArrayList<Customer> listCustomer = getListCustomer();
         for (Customer c : listCustomer) {
             if ((c.getUsername().equals(options) || ("0" + c.getPhoneNumber()).equals(options))
-                    && c.getPassword().equals(password)) {
+                    && c.getPassword().equals(HashingPassword.get_SHA_512_SecurePassword(password))) {
                 return true;
             }
         }
@@ -118,7 +83,7 @@ public class UserRepository implements IUser {
         ArrayList<Admin> listAdmin = getListAdmins();
         for (Admin a : listAdmin) {
             if ((a.getUsername().equals(options) || ("0" + a.getPhoneNumber()).equals(options)) &&
-                    a.getPassword().equals(password)) {
+                    a.getPassword().equals(HashingPassword.get_SHA_512_SecurePassword(password))) {
                 return true;
             }
         }
@@ -164,7 +129,6 @@ public class UserRepository implements IUser {
         ArrayList<Admin> listAdmin = new ArrayList<>();
         ArrayList<String> listRecord = ReadAndWriteFile.read(filePath);
         for (String record : listRecord) {
-//            && StringUtil.countCharInput(record, '/') >= 2
             if (record.contains(String.valueOf(Role.ADMIN))) {
                 listAdmin.add(new Admin(record));
             }

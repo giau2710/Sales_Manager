@@ -6,6 +6,7 @@ import model.ShoppingCart;
 import repository.BusinessRepository;
 import repository.ProductRepository;
 import utils.MoneyFormat;
+import utils.ReadAndWriteFile;
 import utils.StringUtil;
 import utils.TimeUtil;
 
@@ -100,20 +101,8 @@ public class ProductServices {
 
     }
 
-    public void removeProduct() {
-        System.out.println("Nhập tên sản phẩm cần xóa: ");
-        System.out.print("\t➥ ");
-        String nameRemove = inputs.nextLine();
-        if (pr.existProduct(nameRemove)) {
-            pr.remove(nameRemove);
-            System.out.printf("\tĐã xóa sản phẩm '%s' thành công\n", nameRemove);
-        } else {
-            System.out.printf("\tSản phẩm 《 %s 》 không tồn tại!\n", nameRemove);
-        }
 
-    }
-
-    public void updateProduct() throws ParseException {
+    public void updateProduct() {
         System.out.println("Nhập tên hoặc id sản phẩm:");
         System.out.print("\t➥ ");
         String options = inputs.nextLine();
@@ -125,7 +114,6 @@ public class ProductServices {
             ShoppingCart shoppingCartUpdate = businessRepository.getProductCart(options);
             inputNoteUpdate();
 //cập nhật trạng thái sản phẩm
-            ProductStatus productStatusUpdate;
             System.out.println("Trạng thái cập nhật là:");
             System.out.println("\t|-----------------|");
             System.out.println("\t|1.Hiện có        |");
@@ -244,7 +232,7 @@ public class ProductServices {
                 }
             }
 
-//Thong tin chi tiet san pham
+//Cap nhat thong tin chi tiet san pham
             System.out.println("Nhập thông tin chi tiết sản phẩm cần cập nhật:");
             System.out.print("\t➥ ");
             String details = inputs.nextLine();
@@ -269,12 +257,7 @@ public class ProductServices {
     public void displayListProduct() {
         ArrayList<Product> listProduct = pr.getListProduct();
         Collections.sort(listProduct);
-        listProduct.sort(new Comparator<Product>() {
-            @Override
-            public int compare(Product p1, Product p2) {
-                return p2.getProductStatus().compareTo(p1.getProductStatus());
-            }
-        });
+        listProduct.sort((p1, p2) -> p2.getProductStatus().compareTo(p1.getProductStatus()));
         System.out.println("\t\t--------------------------------------------------------------------------------------------------------------------------");
         System.out.println("                   •·.¸¸.·´¯`·.¸¸.•·.¸¸.·´¯`·.¸¸.•      DANH SÁCH SẢN PHẨM      •·.¸¸.·´¯`·.¸¸.•·.¸¸.·´¯`·.¸¸.•           ");
         System.out.println("\t\t--------------------------------------------------------------------------------------------------------------------------");
@@ -295,12 +278,7 @@ public class ProductServices {
     public void displayListProductNew() {
         ArrayList<Product> listProduct = pr.getListProduct();
         Collections.sort(listProduct);
-        listProduct.sort(new Comparator<Product>() {
-            @Override
-            public int compare(Product p1, Product p2) {
-                return p2.getProductStatus().compareTo(p1.getProductStatus());
-            }
-        });
+        listProduct.sort((p1, p2) -> p2.getProductStatus().compareTo(p1.getProductStatus()));
         System.out.println("\t\t--------------------------------------------------------------------------------------------------------------------------");
         System.out.println("                  •·.¸¸.·´¯`·.¸¸.•·.¸¸.·´¯`·.¸¸.•      DANH SÁCH SẢN PHẨM MỚI      •·.¸¸.·´¯`·.¸¸.•·.¸¸.·´¯`·.¸¸.•           ");
         System.out.println("\t\t--------------------------------------------------------------------------------------------------------------------------");
@@ -334,17 +312,14 @@ public class ProductServices {
             String nameSearch = inputs.nextLine();
             if (!nameSearch.equals("0")) {
                 ArrayList<Product> listProduct = pr.getListProduct();
-                listProduct.sort(new Comparator<Product>() {
-                    @Override
-                    public int compare(Product p1, Product p2) {
-                        float caseWord1 = StringUtil.countWordAlike(nameSearch, p1.getName());
-                        float caseChar1 = StringUtil.countChar(nameSearch, p1.getName());
-                        float caseWord2 = StringUtil.countWordAlike(nameSearch, p2.getName());
-                        float caseChar2 = StringUtil.countChar(nameSearch, p2.getName());
-                        if (p1.getName().equalsIgnoreCase(nameSearch) || p2.getName().equalsIgnoreCase(nameSearch)) {
-                            return -2;
-                        }else return Float.compare(caseChar1 + caseWord1, caseChar2 + caseWord2);
-                    }
+                listProduct.sort((p1, p2) -> {
+                    float caseWord1 = StringUtil.countWordAlike(nameSearch, p1.getName());
+                    float caseChar1 = StringUtil.countChar(nameSearch, p1.getName());
+                    float caseWord2 = StringUtil.countWordAlike(nameSearch, p2.getName());
+                    float caseChar2 = StringUtil.countChar(nameSearch, p2.getName());
+                    if (p1.getName().equalsIgnoreCase(nameSearch) || p2.getName().equalsIgnoreCase(nameSearch)) {
+                        return -2;
+                    } else return Float.compare(caseChar1 + caseWord1, caseChar2 + caseWord2);
                 });
                 System.out.println("\t\t--------------------------------------------------------------------------------------------------------------------------");
                 System.out.println("                   •·.¸¸.·´¯`·.¸¸.•·.¸¸.·´¯`·.¸¸.•      DANH SÁCH SẢN PHẨM TÌM KIẾM     •·.¸¸.·´¯`·.¸¸.•·.¸¸.·´¯`·.¸¸.•           ");
@@ -356,7 +331,8 @@ public class ProductServices {
                     String nameProduct = p.getName();
                     float caseWord = StringUtil.countWordAlike(nameSearch, nameProduct);
                     float caseChar = StringUtil.countChar(nameSearch, nameProduct);
-                    if (caseWord > 0.5 || (caseWord + caseChar > 0.8 && StringUtil.ApproximateStrings(nameSearch, nameProduct))) {
+                    String handlingNameSearch = nameSearch.trim().replaceAll("\\s+", "").toLowerCase();
+                    if (caseWord > 0.5 || (caseWord + caseChar > 0.8 && StringUtil.ApproximateStrings(nameSearch, nameProduct)) || (supportSearchByName(nameSearch) && p.getName().toLowerCase().contains(handlingNameSearch))) {
                         checkProduct = true;
                         count++;
                         if (p.getScoreRating() == 0) {
@@ -374,6 +350,28 @@ public class ProductServices {
                 System.out.println();
             } else return;
         }
+    }
+
+    public boolean supportSearchByName(String nameSearch) {
+        String nameProductString = nameSearch.trim().replaceAll("\\s+", " ").toLowerCase();
+        String[] arrNameProduct = nameProductString.split(" ");
+        ArrayList<String> checkKeywords = ReadAndWriteFile.readSupport();
+        boolean check = false;
+        for (String a : arrNameProduct) {
+            System.out.println(arrNameProduct.length);
+            System.out.println(a);
+            for (String st : checkKeywords) {
+                if (st.equalsIgnoreCase(a)) {
+                    check = true;
+                    break;
+                } else{
+                    check= false;
+                }
+
+            }
+        }
+        return check;
+
     }
 
     private void inputNoteUpdate() {

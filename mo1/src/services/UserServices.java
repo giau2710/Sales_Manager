@@ -5,6 +5,7 @@ import model.Customer;
 import model.Role;
 import repository.ProductRepository;
 import repository.UserRepository;
+import utils.HashingPassword;
 import utils.RegularExpression;
 import utils.TimeUtil;
 
@@ -53,6 +54,7 @@ public class UserServices {
             System.out.print("\t➥ ");
             passWord = inputs.nextLine();
             if (RegularExpression.isPasswordValid(passWord)) {
+                passWord = HashingPassword.get_SHA_512_SecurePassword(passWord);
                 break;
             } else {
                 System.out.println("Mật khẩu phải trên 6 kí tự và phải bao gồm: chữ hoa, chữ thuờng, kí tự số, kí tự đặc biệt!");
@@ -72,6 +74,7 @@ public class UserServices {
                         Random random = new Random();
                         String characterPassword = String.valueOf(characters.charAt(random.nextInt(characters.length())));
                         passWord = pr.getRandomId() + "a" + characterPassword;
+                        passWord = HashingPassword.get_SHA_512_SecurePassword(passWord);
                         System.out.println("\tMật khẩu của bạn là: " + passWord);
                         System.out.println("\tHãy ghi nhớ để đăng nhập!");
                         break;
@@ -155,33 +158,6 @@ public class UserServices {
         }
     }
 
-    public void removeUser() throws ParseException {
-        System.out.println("Nhập tên tài khoản cần xóa:");
-        System.out.print("\t➥ ");
-        String username = inputs.nextLine();
-        if (ur.existUser(username)) {
-            String choice = "0";
-            while (!choice.equals("1")) {
-                System.out.printf("Có phải bạn muốn xóa tài khoản 《 %s 》\n", username);
-                System.out.println("-------------");
-                System.out.println("    1.Có     ");
-                System.out.println("    2.Không  ");
-                System.out.println("-------------");
-                System.out.print("\t➥ ");
-                choice = inputs.nextLine();
-                if (choice.equals("1")) {
-                    ur.remove(username, Role.CUSTOMER);
-                    System.out.printf("Đã xóa thành công tài khoản 《 %s 》\n", username);
-                } else if (choice.equals("2")) {
-                    return;
-                } else {
-                    System.out.println("Mời bạn nhập đúng lựa chọn!");
-                }
-
-            }
-        } else
-            System.out.printf("Tài khoản 《 %s 》 không tồn tại!\n", username);
-    }
 
     public void updateUser() throws ParseException {
         Customer customerUpdate = new Customer();
@@ -225,6 +201,7 @@ public class UserServices {
                 break;
             } else {
                 if (RegularExpression.isPasswordValid(passwordUpdate)) {
+                    passwordUpdate=HashingPassword.get_SHA_512_SecurePassword(passwordUpdate);
                     break;
                 } else {
                     System.out.println("Mật khẩu yếu! Xin vui lòng nhập lại");
@@ -300,7 +277,7 @@ public class UserServices {
 
     public void searchCustomer() {
         while (true) {
-            System.out.println("Nhập tên hoặc số điện thoại cần tìm kiếm:");
+            System.out.println("Nhập tên hoặc số điện thoại của tài khoản cần tìm kiếm:");
             System.out.print("\t➥ ");
             String options = inputs.nextLine();
             if (ur.existCustomer(options)) {
@@ -308,7 +285,7 @@ public class UserServices {
                 LoginServices.loginUsername = customerSearch.getUsername();
                 System.out.println("\tHọ và tên:        " + customerSearch.getFullName());
                 System.out.println("\tTên tài khoản:    " + customerSearch.getUsername());
-                System.out.println("\tMật khẩu:         " + customerSearch.getPassword());
+                System.out.println("\tMật khẩu:         " + "***********");
                 System.out.println("\tSố điện thoại:    0" + customerSearch.getPhoneNumber());
                 System.out.println("\tCấp độ:           " + customerSearch.getLevel());
                 return;
@@ -327,7 +304,7 @@ public class UserServices {
         int count = 0;
         for (Customer c : listCustomer) {
             count++;
-            System.out.printf("\t\t\t%-5s %-20s %-20s %-20s %-25s %.1f \n", count, c.getFullName(), c.getUsername(), c.getPassword(), c.getPhoneNumber(), c.getLevel());
+            System.out.printf("\t\t\t%-5s %-20s %-20s %-20s %-25s %.1f \n", count, c.getFullName(), c.getUsername(), "*********", c.getPhoneNumber(), c.getLevel());
         }
         System.out.println("\t\t------------------------------------------------------------------------------------------------------------");
 

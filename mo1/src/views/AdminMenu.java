@@ -6,10 +6,7 @@ import model.ShoppingCart;
 import repository.BusinessRepository;
 import repository.ProductRepository;
 import repository.UserRepository;
-import services.LoginServices;
-import services.ProductServices;
-import services.SupportSearch;
-import services.UserServices;
+import services.*;
 import utils.MoneyFormat;
 import utils.StringUtil;
 import utils.TimeUtil;
@@ -18,7 +15,7 @@ import java.text.ParseException;
 import java.util.*;
 
 public class AdminMenu {
-    public AdminMenu() throws ParseException {
+    public AdminMenu() {
     }
 
     public static void menu() {
@@ -29,18 +26,20 @@ public class AdminMenu {
         System.out.println("\t| 2.Xem danh sách sản phẩm mới         |");
         System.out.println("\t| 3.Tìm kiếm sản phẩm theo tên         |");
         System.out.println("\t| 4.Tìm kiếm sản phẩm theo giá         |");
-        System.out.println("\t| 5.Quản lí người dùng                 |");
+        System.out.println("\t| 5.Thêm sản phẩm                      |");
         System.out.println("\t| 6.Cập nhật sản phẩm                  |");
-        System.out.println("\t| 7.Quản lí khuyến mãi                 |");
-        System.out.println("\t| 8.Cập nhật hồ sơ cá nhân             |");
-        System.out.println("\t| 9.Xem tổng doanh thu                 |");
+        System.out.println("\t| 7.Quản lí người dùng                 |");
+        System.out.println("\t| 8.Quản lí khuyến mãi                 |");
+        System.out.println("\t| 9.Cập nhật hồ sơ cá nhân             |");
+        System.out.println("\t| 10.Xem tổng doanh thu                 |");
+        System.out.println("\t| 11.Hỗ trợ khách hàng                 |");
         System.out.println("\t|                         0.Đăng xuất  |");
         System.out.println("\t|--------------------------------------|");
         System.out.println("Mời chọn chức năng:");
         System.out.print("\t➥ ");
     }
 
-    MainView mainView = new MainView();
+
     Scanner inputs = new Scanner(System.in);
     ProductServices productServices = new ProductServices();
     ProductRepository pr = new ProductRepository();
@@ -66,22 +65,29 @@ public class AdminMenu {
                     supportSearch.useSearchByPrice();
                     break;
                 case "5":
-                    CustomerManage customerManage = new CustomerManage();
-                    customerManage.manageCustomer();
+                    productServices.addProduct();
                     break;
                 case "6":
                     productServices.updateProduct();
                     break;
                 case "7":
-                    System.out.println("Chưa thực hiện được!");
+                    CustomerManage customerManage = new CustomerManage();
+                    customerManage.manageCustomer();
                     break;
                 case "8":
+                    System.out.println("Chưa thực hiện được!");
+                    break;
+                case "9":
                     viewProfile();
                     userServices.updateUser();
                     break;
-                case "9":
+                case "10":
                     Sales sales = new Sales();
                     sales.manageSales();
+                    break;
+                case "11":
+                    CustomerSupportServices customerSupportServices =new CustomerSupportServices();
+                    customerSupportServices.repSupport();
                     break;
                 case "0":
                     LoginServices loginServices = new LoginServices();
@@ -105,15 +111,11 @@ public class AdminMenu {
         System.out.println("\tEmail            :" + adminView.getEmail());
     }
 
+
     public void displayListProduct() {
         ArrayList<Product> listProduct = pr.getListProduct();
         Collections.sort(listProduct);
-        listProduct.sort(new Comparator<Product>() {
-            @Override
-            public int compare(Product p1, Product p2) {
-                return p2.getProductStatus().compareTo(p1.getProductStatus());
-            }
-        });
+        listProduct.sort((p1, p2) -> p2.getProductStatus().compareTo(p1.getProductStatus()));
         System.out.println("\t----------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("                       •·.¸¸.·´¯`·.¸¸.•·.¸¸.·´¯`·.¸¸.•      DANH SÁCH SẢN PHẨM      •·.¸¸.·´¯`·.¸¸.•·.¸¸.·´¯`·.¸¸.•           ");
         System.out.println("\t----------------------------------------------------------------------------------------------------------------------------------");
@@ -131,15 +133,11 @@ public class AdminMenu {
         System.out.println();
     }
 
+
     public void displayListProductNew() {
         ArrayList<Product> listProduct = pr.getListProduct();
         Collections.sort(listProduct);
-        listProduct.sort(new Comparator<Product>() {
-            @Override
-            public int compare(Product p1, Product p2) {
-                return p2.getProductStatus().compareTo(p1.getProductStatus());
-            }
-        });
+        listProduct.sort((p1, p2) -> p2.getProductStatus().compareTo(p1.getProductStatus()));
         System.out.println("\t----------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("                         •·.¸¸.·´¯`·.¸¸.•·.¸¸.·´¯`·.¸¸.•      DANH SÁCH SẢN PHẨM MỚI      •·.¸¸.·´¯`·.¸¸.•·.¸¸.·´¯`·.¸¸.•           ");
         System.out.println("\t----------------------------------------------------------------------------------------------------------------------------------");
@@ -173,17 +171,14 @@ public class AdminMenu {
             String nameSearch = inputs.nextLine();
             if (!nameSearch.equals("0")) {
                 ArrayList<Product> listProduct = pr.getListProduct();
-                listProduct.sort(new Comparator<Product>() {
-                    @Override
-                    public int compare(Product p1, Product p2) {
-                        float caseWord1 = StringUtil.countWordAlike(nameSearch, p1.getName());
-                        float caseChar1 = StringUtil.countChar(nameSearch, p1.getName());
-                        float caseWord2 = StringUtil.countWordAlike(nameSearch, p2.getName());
-                        float caseChar2 = StringUtil.countChar(nameSearch, p2.getName());
-                        if (p1.getName().equalsIgnoreCase(nameSearch) || p2.getName().equalsIgnoreCase(nameSearch)) {
-                            return -2;
-                        } else return Float.compare(caseChar1 + caseWord1, caseChar2 + caseWord2);
-                    }
+                listProduct.sort((p1, p2) -> {
+                    float caseWord1 = StringUtil.countWordAlike(nameSearch, p1.getName());
+                    float caseChar1 = StringUtil.countChar(nameSearch, p1.getName());
+                    float caseWord2 = StringUtil.countWordAlike(nameSearch, p2.getName());
+                    float caseChar2 = StringUtil.countChar(nameSearch, p2.getName());
+                    if (p1.getName().equalsIgnoreCase(nameSearch) || p2.getName().equalsIgnoreCase(nameSearch)) {
+                        return -2;
+                    } else return Float.compare(caseChar1 + caseWord1, caseChar2 + caseWord2);
                 });
                 System.out.println("\t----------------------------------------------------------------------------------------------------------------------------------");
                 System.out.println("                         •·.¸¸.·´¯`·.¸¸.•·.¸¸.·´¯`·.¸¸.•      DANH SÁCH SẢN PHẨM MỚI      •·.¸¸.·´¯`·.¸¸.•·.¸¸.·´¯`·.¸¸.•           ");
@@ -218,7 +213,7 @@ public class AdminMenu {
     //Lớp con: quản lí người dùng
     public static class CustomerManage {
 
-        public CustomerManage() throws ParseException {
+        public CustomerManage()  {
         }
 
         public void menu() {
@@ -270,7 +265,7 @@ public class AdminMenu {
     //Xem doanh thu
     public static class Sales {
 
-        public Sales() throws ParseException {
+        public Sales()  {
         }
 
         public void menu() {
@@ -288,7 +283,6 @@ public class AdminMenu {
             System.out.print("\t➥ ");
         }
 
-        UserServices userServices = new UserServices();
         BusinessRepository businessRepository = new BusinessRepository();
         Scanner inputs = new Scanner(System.in);
 

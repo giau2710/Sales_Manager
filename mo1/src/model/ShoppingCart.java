@@ -1,22 +1,22 @@
 package model;
 
-import repository.ProductRepository;
+
 import repository.UserRepository;
 
-import java.text.ParseException;
+
 
 public class ShoppingCart implements IByProduct {
-    ProductRepository pr = new ProductRepository();
+
     UserRepository ur = new UserRepository();
-    private String username;
-    private String productId;
+    private final String username;
+    private final String productId;
     private String productName;
     private int quantity;
     private int sumPrice;
-    private String dateBy;
+    private final String dateBy;
     private ProductStatus productStatus;
 
-    public ShoppingCart(String username, String productId, String productName, int quantity, int sumPrice, String dateBy,ProductStatus productStatus) throws ParseException {
+    public ShoppingCart(String username, String productId, String productName, int quantity, int sumPrice, String dateBy,ProductStatus productStatus)  {
         this.username = username;
         this.productId = productId;
         this.productName = productName;
@@ -62,34 +62,20 @@ public class ShoppingCart implements IByProduct {
         return dateBy;
     }
 
-    public void setDateBy(String dateBy) {
-        this.dateBy = dateBy;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public String getProductId() {
         return productId;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
 
-    public ProductStatus getProductStatus() {
-        return productStatus;
-    }
 
     public void setProductStatus(ProductStatus productStatus) {
         this.productStatus = productStatus;
     }
 
-    public ShoppingCart() throws ParseException {
-    }
 
-    public ShoppingCart(String record) throws ParseException {
+
+    public ShoppingCart(String record)  {
         String[] fields = record.split(";");
         username = fields[0];
         productId = fields[1];

@@ -23,7 +23,6 @@ public class VisitorView {
         System.out.println("\t| 5.Đăng ký                            |");
         System.out.println("\t| 6.Đăng nhập                          |");
         System.out.println("\t| 7.Thông tin khuyến mãi               |");
-        System.out.println("\t| 8.Hỗ trợ                             |");
         System.out.println("\t|                         0.Quay lại   |");
         System.out.println("\t|--------------------------------------|");
         System.out.println("Mời chọn chức năng:");

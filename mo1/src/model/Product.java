@@ -92,9 +92,7 @@ public class Product implements Comparable<Product> {
         this.numberOfReviews = numberOfReviews;
     }
 
-    public String getDetails() {
-        return details;
-    }
+
 
     public void setDetails(String details) {
         this.details = details;
@@ -116,7 +114,7 @@ public class Product implements Comparable<Product> {
     @Override
     public int compareTo(Product p) {
         if (this.getScoreRating() == p.getScoreRating()) {
-            return (int) (TimeUtil.periodNow(p.getDatePost()) - TimeUtil.periodNow(this.getDatePost()));
+            return (int) (TimeUtil.periodNow(this.getDatePost()) - TimeUtil.periodNow(p.getDatePost()));
         }
         return Double.compare(p.getScoreRating(), this.getScoreRating());
     }

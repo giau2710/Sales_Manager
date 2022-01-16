@@ -4,16 +4,13 @@ import repository.UserRepository;
 import services.BusinessServices;
 import services.LoginServices;
 import services.ProductServices;
-import services.UserServices;
 
 import java.text.ParseException;
 import java.util.Scanner;
 
 public class BusinessView {
-    MainView mainView = new MainView();
     Scanner inputs = new Scanner(System.in);
     ProductServices productServices = new ProductServices();
-    UserServices userServices = new UserServices();
     BusinessServices businessServices = new BusinessServices();
     LoginServices loginServices = new LoginServices();
 

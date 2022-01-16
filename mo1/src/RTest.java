@@ -4,10 +4,8 @@ import model.*;
 import repository.BusinessRepository;
 import repository.ProductRepository;
 import repository.UserRepository;
-import services.BusinessServices;
-import services.ProductServices;
-import services.SupportSearch;
-import services.UserServices;
+import services.*;
+import utils.HashingPassword;
 import utils.TimeUtil;
 import views.AdminMenu;
 import views.MainView;
@@ -42,9 +40,11 @@ public class RTest {
         AdminMenu adminMenu =new AdminMenu();
 //        adminMenu.displayListProduct();
         AdminMenu.Sales sales=new AdminMenu.Sales();
-        while (true) {
-            sales.revenuePeriods();
-        }
+        CustomerSupportServices customerSupportServices =new CustomerSupportServices();
+
+//        System.out.println(HashingPassword.get_SHA_512_SecurePassword("d"));
+//        LoginServices.loginUsername="a";
+        customerSupportServices.repSupport();
 //        sales.revenueByMonth();
 //        sales.revenueByYear();
 //        System.out.println(checkPassword("ha"));
@@ -67,39 +67,8 @@ public class RTest {
 
 //        System.out.println(get_SHA_512_SecurePassword("tanocchio","ahannaowruwierkasdl;fopasodfjsaf"));
     }
-    public static String get_SHA_512_SecurePassword(String passwordToHash, String salt){
-        String generatedPassword = null;
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-512");
-            md.update(salt.getBytes(StandardCharsets.UTF_8));
-            byte[] bytes = md.digest(passwordToHash.getBytes(StandardCharsets.UTF_8));
-            StringBuilder sb = new StringBuilder();
-            for(int i=0; i< bytes.length ;i++){
-                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-            }
-            generatedPassword = sb.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return generatedPassword;
-    }
-    public static boolean checkPassword(String password) throws ParseException {
-        Scanner inputs = new Scanner(System.in);
-        ProductServices ps = new ProductServices();
-        ProductRepository pr = new ProductRepository();
-        UserRepository ur = new UserRepository();
-        UserServices us = new UserServices();
-        BusinessServices bs = new BusinessServices();
-        BusinessRepository br = new BusinessRepository();
-        SupportSearch supportSearch=new SupportSearch();
-        ArrayList<Customer> list =ur.getListCustomer();
-        for (Customer c:list){
-            if( get_SHA_512_SecurePassword(c.getPassword(),"giau").equals(get_SHA_512_SecurePassword(password,"giau"))){
-                return true;
-            }
-        }
-        return false;
-    }
+
+
 
 }
 

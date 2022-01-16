@@ -16,12 +16,7 @@ public class SupportSearch {
     public void searchByPrice(int startPrice, int endPrice) {
         ArrayList<Product> listProduct = pr.getListProduct();
         Collections.sort(listProduct);
-        listProduct.sort(new Comparator<Product>() {
-            @Override
-            public int compare(Product p1, Product p2) {
-                return p2.getPrice() - p1.getPrice();
-            }
-        });
+        listProduct.sort((p1, p2) -> p2.getPrice() - p1.getPrice());
         System.out.println("\t\t--------------------------------------------------------------------------------------------------------------------------");
         System.out.println("                   •·.¸¸.·´¯`·.¸¸.•·.¸¸.·´¯`·.¸¸.•      DANH SÁCH SẢN PHẨM TÌM KIẾM     •·.¸¸.·´¯`·.¸¸.•·.¸¸.·´¯`·.¸¸.•           ");
         System.out.println("\t\t--------------------------------------------------------------------------------------------------------------------------");

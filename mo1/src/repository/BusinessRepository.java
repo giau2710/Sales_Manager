@@ -1,33 +1,39 @@
 package repository;
 
 import model.Product;
+import model.ProductStatus;
 import model.ShoppingCart;
-import services.ProductServices;
+
 import utils.ReadAndWriteFile;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 
 public class BusinessRepository {
     public final static String filePathBuy = "src/data/product_by.txt";
     public final static String filePathShoppingCart = "src/data/shopping_cart.txt";
     ProductRepository pr = new ProductRepository();
-    ProductServices ps = new ProductServices();
 
-    public void updateBoughtProduct(String idProduct, int quantityBuy, double scoreRating) throws ParseException {
+
+    public void updateBoughtProduct(String idProduct, int quantityBuy, double scoreRating) {
         Product productBought = pr.getProduct(idProduct);
         if (scoreRating == -1) {
             productBought.setQuantity(productBought.getQuantity() - quantityBuy);
+            if(productBought.getQuantity()==0){
+                productBought.setProductStatus(ProductStatus.OUT_OF_STOCK);
+            }
             pr.update(productBought, productBought.getId());
         } else {
             productBought.setQuantity(productBought.getQuantity() - quantityBuy);
             productBought.setScoreRating(scoreRating);
             productBought.setNumberOfReviews(productBought.getNumberOfReviews() + 1);
+            if(productBought.getQuantity()==0){
+                productBought.setProductStatus(ProductStatus.OUT_OF_STOCK);
+            }
             pr.update(productBought, productBought.getId());
         }
     }
 
-    public void updateProductCart(ShoppingCart shoppingCart, String options) throws ParseException {
+    public void updateProductCart(ShoppingCart shoppingCart, String options)  {
         ArrayList<ShoppingCart> list = getListProductBought(filePathShoppingCart);
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getUsername().equalsIgnoreCase(options) || list.get(i).getProductId().equals(options)) {
@@ -37,7 +43,7 @@ public class BusinessRepository {
         ReadAndWriteFile.writeClear(filePathShoppingCart, list);
     }
 
-    public ShoppingCart getProductCart(String options) throws ParseException {
+    public ShoppingCart getProductCart(String options)  {
         ArrayList<ShoppingCart> list = getListProductBought(filePathShoppingCart);
         for (ShoppingCart s : list) {
             if (s.getProductName().equalsIgnoreCase(options) || s.getProductId().equals(options)) {
@@ -47,7 +53,7 @@ public class BusinessRepository {
         return null;
     }
 
-    public boolean existProductShoppingCart(String id) throws ParseException {
+    public boolean existProductShoppingCart(String id)  {
         ArrayList<ShoppingCart> listProductBought = getListProductBought(filePathShoppingCart);
         for (ShoppingCart s : listProductBought) {
             if (id.equals(s.getProductId())) {
@@ -57,13 +63,13 @@ public class BusinessRepository {
         return false;
     }
 
-    public void addProductBought(String filePathBuy, ShoppingCart shoppingCart) throws ParseException {
+    public void addProductBought(String filePathBuy, ShoppingCart shoppingCart)  {
         ArrayList<ShoppingCart> listProductBought = getListProductBought(filePathBuy);
         listProductBought.add(0, shoppingCart);
         ReadAndWriteFile.writeClear(filePathBuy, listProductBought);
     }
 
-    public ArrayList<ShoppingCart> getListProductBought(String filePathBuy) throws ParseException {
+    public ArrayList<ShoppingCart> getListProductBought(String filePathBuy) {
         ArrayList<ShoppingCart> listProductBought = new ArrayList<>();
         ArrayList<String> listRecord = ReadAndWriteFile.read(filePathBuy);
         if (!listRecord.isEmpty()) {
@@ -76,7 +82,7 @@ public class BusinessRepository {
         return null;
     }
 
-    public void removeProductShoppingCart(String id) throws ParseException {
+    public void removeProductShoppingCart(String id){
         if (existProductShoppingCart(id)) {
             ArrayList<ShoppingCart> list = getListProductBought(filePathShoppingCart);
             for (ShoppingCart s : list) {

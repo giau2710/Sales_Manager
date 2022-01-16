@@ -1,6 +1,7 @@
 package views;
 
 import model.Role;
+import services.CustomerSupportServices;
 import services.LoginServices;
 import services.UserServices;
 
@@ -8,7 +9,6 @@ import java.text.ParseException;
 import java.util.Scanner;
 
 public class MainView {
-    Scanner inputs = new Scanner(System.in);
     public static String checkLoginTime = "11/11/1111 12:34:56";
 
     public static void menu() {
@@ -19,6 +19,7 @@ public class MainView {
         System.out.println("\t| 2.Đăng nhập                          |");
         System.out.println("\t| 3.Đăng ký                            |");
         System.out.println("\t| 4.Thông tin SHOPRICH                 |");
+        System.out.println("\t| 5.Hỗ trợ                             |");
         System.out.println("\t|               0.Thoát chương trình   |");
         System.out.println("\t|--------------------------------------|");
         System.out.println("Mời chọn chức năng:");
@@ -56,6 +57,11 @@ public class MainView {
                 case 4:
                     informationShop();
                     break;
+                case 5:
+                    CustomerSupportServices customerSupportServices=new CustomerSupportServices();
+                    customerSupportServices.addSupport();
+                    menu();
+                    break;
                 case 0:
                     System.exit(0);
                 default:
@@ -70,17 +76,16 @@ public class MainView {
 
     public void getGreeting() {
         String greeting = "CHÀO MỪNG BẠN ĐẾN VỚI SHOPRICH. KHÁCH HÀNG LÀ THƯỢNG ĐẾ!";
-//        char[] charGreeting = greeting.toCharArray();
-//        for (char cg : charGreeting) {
-//            System.out.print(cg);
-//            try {
-//                Thread.sleep(15);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        System.out.println();
-        System.out.println(greeting);
+        char[] charGreeting = greeting.toCharArray();
+        for (char cg : charGreeting) {
+            System.out.print(cg);
+            try {
+                Thread.sleep(9);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println();
     }
 
     public void informationShop(){
